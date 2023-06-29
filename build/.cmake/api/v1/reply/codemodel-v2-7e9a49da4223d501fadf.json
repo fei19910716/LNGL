@@ -1,0 +1,1392 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						9,
+						10
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1,
+						3,
+						4
+					]
+				},
+				{
+					"build" : "external",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"jsonFile" : "directory-external-Debug-d8969718d56d94ae4e32.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "external"
+				},
+				{
+					"build" : "external/glad",
+					"jsonFile" : "directory-external.glad-Debug-fe552af5a86a4942293e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glad",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "external/glfw",
+					"jsonFile" : "directory-external.glfw-Debug-32262a0c72daaba76ac5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glfw",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "external/freetype",
+					"jsonFile" : "directory-external.freetype-Debug-1027f4f98a2a67b2681c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/freetype"
+				},
+				{
+					"build" : "external/stb",
+					"jsonFile" : "directory-external.stb-Debug-be2170db882f4da169f4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/stb"
+				},
+				{
+					"build" : "external/assimp",
+					"jsonFile" : "directory-external.assimp-Debug-776fccbc82cea078da29.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/assimp",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "external/glm",
+					"childIndexes" : 
+					[
+						8
+					],
+					"jsonFile" : "directory-external.glm-Debug-c35beecffdababf19b76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "external/glm",
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				},
+				{
+					"build" : "external/glm/glm",
+					"jsonFile" : "directory-external.glm.glm-Debug-abc7302ed9fa59a98343.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 7,
+					"projectIndex" : 1,
+					"source" : "external/glm/glm"
+				},
+				{
+					"build" : "base",
+					"jsonFile" : "directory-base-Debug-554918083650b4e24ef4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "base",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "examples",
+					"childIndexes" : 
+					[
+						11
+					],
+					"jsonFile" : "directory-examples-Debug-2e8964349ffea94e1580.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "examples"
+				},
+				{
+					"build" : "examples/8.guest",
+					"childIndexes" : 
+					[
+						12
+					],
+					"jsonFile" : "directory-examples.8.guest-Debug-4b3a05777247e1dea43f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest"
+				},
+				{
+					"build" : "examples/8.guest/2022",
+					"childIndexes" : 
+					[
+						13
+					],
+					"jsonFile" : "directory-examples.8.guest.2022-Debug-cff4a273c0bd5a916920.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022"
+				},
+				{
+					"build" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"jsonFile" : "directory-examples.8.guest.2022.5.computeshader_helloworld-Debug-a580a6224296731d734c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 12,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						9,
+						10,
+						11,
+						12,
+						13
+					],
+					"name" : "myProject",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7,
+						8
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 13,
+					"id" : "5.computeshader_helloworld::@292430ee00c6954b7418",
+					"jsonFile" : "target-5.computeshader_helloworld-Debug-d7e4e7bd58f41e7b4e6e.json",
+					"name" : "5.computeshader_helloworld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-00ed0085fd1a506bd076.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ALL_BUILD::@446904e9652187aa75c1",
+					"jsonFile" : "target-ALL_BUILD-Debug-7cbed0a43c2737890e81.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "BuildClean::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BuildClean-Debug-cb2b1bd76a97907a5267.json",
+					"name" : "BuildClean",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-0c65b799a3b28e86394a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "base::@4506b02e7a4fef989908",
+					"jsonFile" : "target-base-Debug-3edd169f72cf7cbf74e7.json",
+					"name" : "base",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "copy_assimp::@3253ab71256c6811a023",
+					"jsonFile" : "target-copy_assimp-Debug-ab382f6d9ccad2ba5709.json",
+					"name" : "copy_assimp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "copy_glfw::@691b517da5fa0f694cd4",
+					"jsonFile" : "target-copy_glfw-Debug-c3b7c079c1f448172cf6.json",
+					"name" : "copy_glfw",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glad::@55512df44c152ef9a2ca",
+					"jsonFile" : "target-glad-Debug-cba33f5c379f31c43f3f.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "uninstall::@446904e9652187aa75c1",
+					"jsonFile" : "target-uninstall-Debug-a42f84dba6f2835eea11.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						9,
+						10
+					],
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1,
+						3,
+						4
+					]
+				},
+				{
+					"build" : "external",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"jsonFile" : "directory-external-Release-d8969718d56d94ae4e32.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "external"
+				},
+				{
+					"build" : "external/glad",
+					"jsonFile" : "directory-external.glad-Release-fe552af5a86a4942293e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glad",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "external/glfw",
+					"jsonFile" : "directory-external.glfw-Release-32262a0c72daaba76ac5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glfw",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "external/freetype",
+					"jsonFile" : "directory-external.freetype-Release-1027f4f98a2a67b2681c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/freetype"
+				},
+				{
+					"build" : "external/stb",
+					"jsonFile" : "directory-external.stb-Release-be2170db882f4da169f4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/stb"
+				},
+				{
+					"build" : "external/assimp",
+					"jsonFile" : "directory-external.assimp-Release-776fccbc82cea078da29.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/assimp",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "external/glm",
+					"childIndexes" : 
+					[
+						8
+					],
+					"jsonFile" : "directory-external.glm-Release-c35beecffdababf19b76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "external/glm",
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				},
+				{
+					"build" : "external/glm/glm",
+					"jsonFile" : "directory-external.glm.glm-Release-abc7302ed9fa59a98343.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 7,
+					"projectIndex" : 1,
+					"source" : "external/glm/glm"
+				},
+				{
+					"build" : "base",
+					"jsonFile" : "directory-base-Release-554918083650b4e24ef4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "base",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "examples",
+					"childIndexes" : 
+					[
+						11
+					],
+					"jsonFile" : "directory-examples-Release-2e8964349ffea94e1580.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "examples"
+				},
+				{
+					"build" : "examples/8.guest",
+					"childIndexes" : 
+					[
+						12
+					],
+					"jsonFile" : "directory-examples.8.guest-Release-4b3a05777247e1dea43f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest"
+				},
+				{
+					"build" : "examples/8.guest/2022",
+					"childIndexes" : 
+					[
+						13
+					],
+					"jsonFile" : "directory-examples.8.guest.2022-Release-cff4a273c0bd5a916920.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022"
+				},
+				{
+					"build" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"jsonFile" : "directory-examples.8.guest.2022.5.computeshader_helloworld-Release-a580a6224296731d734c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 12,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						9,
+						10,
+						11,
+						12,
+						13
+					],
+					"name" : "myProject",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7,
+						8
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 13,
+					"id" : "5.computeshader_helloworld::@292430ee00c6954b7418",
+					"jsonFile" : "target-5.computeshader_helloworld-Release-808a62dae996f8efbab5.json",
+					"name" : "5.computeshader_helloworld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-00ed0085fd1a506bd076.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ALL_BUILD::@446904e9652187aa75c1",
+					"jsonFile" : "target-ALL_BUILD-Release-7cbed0a43c2737890e81.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "BuildClean::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BuildClean-Release-cb2b1bd76a97907a5267.json",
+					"name" : "BuildClean",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-0c65b799a3b28e86394a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "base::@4506b02e7a4fef989908",
+					"jsonFile" : "target-base-Release-99e10c29a68f69755fac.json",
+					"name" : "base",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "copy_assimp::@3253ab71256c6811a023",
+					"jsonFile" : "target-copy_assimp-Release-ab382f6d9ccad2ba5709.json",
+					"name" : "copy_assimp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "copy_glfw::@691b517da5fa0f694cd4",
+					"jsonFile" : "target-copy_glfw-Release-c3b7c079c1f448172cf6.json",
+					"name" : "copy_glfw",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glad::@55512df44c152ef9a2ca",
+					"jsonFile" : "target-glad-Release-63fe605d62ea6bcb057f.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "uninstall::@446904e9652187aa75c1",
+					"jsonFile" : "target-uninstall-Release-a42f84dba6f2835eea11.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						9,
+						10
+					],
+					"jsonFile" : "directory-.-MinSizeRel-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1,
+						3,
+						4
+					]
+				},
+				{
+					"build" : "external",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"jsonFile" : "directory-external-MinSizeRel-d8969718d56d94ae4e32.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "external"
+				},
+				{
+					"build" : "external/glad",
+					"jsonFile" : "directory-external.glad-MinSizeRel-fe552af5a86a4942293e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glad",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "external/glfw",
+					"jsonFile" : "directory-external.glfw-MinSizeRel-32262a0c72daaba76ac5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glfw",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "external/freetype",
+					"jsonFile" : "directory-external.freetype-MinSizeRel-1027f4f98a2a67b2681c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/freetype"
+				},
+				{
+					"build" : "external/stb",
+					"jsonFile" : "directory-external.stb-MinSizeRel-be2170db882f4da169f4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/stb"
+				},
+				{
+					"build" : "external/assimp",
+					"jsonFile" : "directory-external.assimp-MinSizeRel-776fccbc82cea078da29.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/assimp",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "external/glm",
+					"childIndexes" : 
+					[
+						8
+					],
+					"jsonFile" : "directory-external.glm-MinSizeRel-c35beecffdababf19b76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "external/glm",
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				},
+				{
+					"build" : "external/glm/glm",
+					"jsonFile" : "directory-external.glm.glm-MinSizeRel-abc7302ed9fa59a98343.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 7,
+					"projectIndex" : 1,
+					"source" : "external/glm/glm"
+				},
+				{
+					"build" : "base",
+					"jsonFile" : "directory-base-MinSizeRel-554918083650b4e24ef4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "base",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "examples",
+					"childIndexes" : 
+					[
+						11
+					],
+					"jsonFile" : "directory-examples-MinSizeRel-2e8964349ffea94e1580.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "examples"
+				},
+				{
+					"build" : "examples/8.guest",
+					"childIndexes" : 
+					[
+						12
+					],
+					"jsonFile" : "directory-examples.8.guest-MinSizeRel-4b3a05777247e1dea43f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest"
+				},
+				{
+					"build" : "examples/8.guest/2022",
+					"childIndexes" : 
+					[
+						13
+					],
+					"jsonFile" : "directory-examples.8.guest.2022-MinSizeRel-cff4a273c0bd5a916920.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022"
+				},
+				{
+					"build" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"jsonFile" : "directory-examples.8.guest.2022.5.computeshader_helloworld-MinSizeRel-a580a6224296731d734c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 12,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						9,
+						10,
+						11,
+						12,
+						13
+					],
+					"name" : "myProject",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7,
+						8
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 13,
+					"id" : "5.computeshader_helloworld::@292430ee00c6954b7418",
+					"jsonFile" : "target-5.computeshader_helloworld-MinSizeRel-4ee957dbd19d0e7d4ee6.json",
+					"name" : "5.computeshader_helloworld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-00ed0085fd1a506bd076.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ALL_BUILD::@446904e9652187aa75c1",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-7cbed0a43c2737890e81.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "BuildClean::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BuildClean-MinSizeRel-cb2b1bd76a97907a5267.json",
+					"name" : "BuildClean",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-0c65b799a3b28e86394a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "base::@4506b02e7a4fef989908",
+					"jsonFile" : "target-base-MinSizeRel-53de30ac8d073645dd85.json",
+					"name" : "base",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "copy_assimp::@3253ab71256c6811a023",
+					"jsonFile" : "target-copy_assimp-MinSizeRel-ab382f6d9ccad2ba5709.json",
+					"name" : "copy_assimp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "copy_glfw::@691b517da5fa0f694cd4",
+					"jsonFile" : "target-copy_glfw-MinSizeRel-c3b7c079c1f448172cf6.json",
+					"name" : "copy_glfw",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glad::@55512df44c152ef9a2ca",
+					"jsonFile" : "target-glad-MinSizeRel-a439f769a18df2a27e9f.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "uninstall::@446904e9652187aa75c1",
+					"jsonFile" : "target-uninstall-MinSizeRel-a42f84dba6f2835eea11.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						9,
+						10
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1,
+						3,
+						4
+					]
+				},
+				{
+					"build" : "external",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"jsonFile" : "directory-external-RelWithDebInfo-d8969718d56d94ae4e32.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "external"
+				},
+				{
+					"build" : "external/glad",
+					"jsonFile" : "directory-external.glad-RelWithDebInfo-fe552af5a86a4942293e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glad",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "external/glfw",
+					"jsonFile" : "directory-external.glfw-RelWithDebInfo-32262a0c72daaba76ac5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/glfw",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "external/freetype",
+					"jsonFile" : "directory-external.freetype-RelWithDebInfo-1027f4f98a2a67b2681c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/freetype"
+				},
+				{
+					"build" : "external/stb",
+					"jsonFile" : "directory-external.stb-RelWithDebInfo-be2170db882f4da169f4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/stb"
+				},
+				{
+					"build" : "external/assimp",
+					"jsonFile" : "directory-external.assimp-RelWithDebInfo-776fccbc82cea078da29.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "external/assimp",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "external/glm",
+					"childIndexes" : 
+					[
+						8
+					],
+					"jsonFile" : "directory-external.glm-RelWithDebInfo-c35beecffdababf19b76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "external/glm",
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				},
+				{
+					"build" : "external/glm/glm",
+					"jsonFile" : "directory-external.glm.glm-RelWithDebInfo-abc7302ed9fa59a98343.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 7,
+					"projectIndex" : 1,
+					"source" : "external/glm/glm"
+				},
+				{
+					"build" : "base",
+					"jsonFile" : "directory-base-RelWithDebInfo-554918083650b4e24ef4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "base",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "examples",
+					"childIndexes" : 
+					[
+						11
+					],
+					"jsonFile" : "directory-examples-RelWithDebInfo-2e8964349ffea94e1580.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "examples"
+				},
+				{
+					"build" : "examples/8.guest",
+					"childIndexes" : 
+					[
+						12
+					],
+					"jsonFile" : "directory-examples.8.guest-RelWithDebInfo-4b3a05777247e1dea43f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest"
+				},
+				{
+					"build" : "examples/8.guest/2022",
+					"childIndexes" : 
+					[
+						13
+					],
+					"jsonFile" : "directory-examples.8.guest.2022-RelWithDebInfo-cff4a273c0bd5a916920.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022"
+				},
+				{
+					"build" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"jsonFile" : "directory-examples.8.guest.2022.5.computeshader_helloworld-RelWithDebInfo-a580a6224296731d734c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 12,
+					"projectIndex" : 0,
+					"source" : "examples/8.guest/2022/5.computeshader_helloworld",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						9,
+						10,
+						11,
+						12,
+						13
+					],
+					"name" : "myProject",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7,
+						8
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 13,
+					"id" : "5.computeshader_helloworld::@292430ee00c6954b7418",
+					"jsonFile" : "target-5.computeshader_helloworld-RelWithDebInfo-2804eae1bd1d4d87b7ee.json",
+					"name" : "5.computeshader_helloworld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-00ed0085fd1a506bd076.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "ALL_BUILD::@446904e9652187aa75c1",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-7cbed0a43c2737890e81.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "BuildClean::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BuildClean-RelWithDebInfo-cb2b1bd76a97907a5267.json",
+					"name" : "BuildClean",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-0c65b799a3b28e86394a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "base::@4506b02e7a4fef989908",
+					"jsonFile" : "target-base-RelWithDebInfo-25be53949e442b74b17e.json",
+					"name" : "base",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "copy_assimp::@3253ab71256c6811a023",
+					"jsonFile" : "target-copy_assimp-RelWithDebInfo-ab382f6d9ccad2ba5709.json",
+					"name" : "copy_assimp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "copy_glfw::@691b517da5fa0f694cd4",
+					"jsonFile" : "target-copy_glfw-RelWithDebInfo-c3b7c079c1f448172cf6.json",
+					"name" : "copy_glfw",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glad::@55512df44c152ef9a2ca",
+					"jsonFile" : "target-glad-RelWithDebInfo-5569bdd8fdbe0623893c.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "uninstall::@446904e9652187aa75c1",
+					"jsonFile" : "target-uninstall-RelWithDebInfo-a42f84dba6f2835eea11.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Workspace/myGithub/LearnOpenGL/build",
+		"source" : "C:/Workspace/myGithub/LearnOpenGL"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

@@ -1,0 +1,17 @@
+
+
+file(GLOB dirs ${CMAKE_CURRENT_SOURCE_DIR}/*)
+
+# 构建所有samples
+if(BUILD_ALL_SAMPLES)
+    foreach(dir ${dirs})
+        if(IS_DIRECTORY ${dir})
+            add_subdirectory(${dir})
+        endif()
+    endforeach()
+else()
+    # add_subdirectory(1.1.hello_window)
+    # add_subdirectory(1.2.hello_window_clear)
+    # add_subdirectory(2.1.hello_triangle)
+endif()
+
