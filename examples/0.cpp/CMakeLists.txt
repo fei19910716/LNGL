@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(0.cpp)
+    add_subdirectory(hello-cpp)
 endif()
 
