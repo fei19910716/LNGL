@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(skeletal_animation)
+    add_subdirectory(oit)
 endif()
 
