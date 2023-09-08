@@ -35,7 +35,7 @@ void init()
 
     // load and create a texture 
     // -------------------------
-    texture2D.FromImage(FileSystem::getPath("resources/textures/container.jpg").c_str());
+    texture2D.FromImage(FileSystem::getPath("resources/textures/container.jpg").c_str(),false);
 
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
@@ -85,7 +85,7 @@ void render()
     glClear(GL_COLOR_BUFFER_BIT);
 
     // bind Texture
-    texture2D.Bind();
+    texture2D.Bind(GL_TEXTURE0);
 
     // render container
     ourShader.use();

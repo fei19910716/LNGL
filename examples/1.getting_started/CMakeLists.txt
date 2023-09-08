@@ -11,5 +11,6 @@ if(BUILD_ALL_SAMPLES)
     endforeach()
 else()
     add_subdirectory(4.1.textures)
+    add_subdirectory(4.2.textures_combined)
 endif()
 
