@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(2.3.hello_triangle_exercise1)
+    add_subdirectory(3.2.vertex_attribute)
 endif()
 
