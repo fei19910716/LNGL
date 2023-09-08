@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(9.self)
+    add_subdirectory(1.getting_started)
 endif()
 
