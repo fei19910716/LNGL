@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(3.3.shaders_class)
+    add_subdirectory(4.1.textures)
 endif()
 
