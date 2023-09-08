@@ -1,6 +1,6 @@
 #pragma once
 
-#include "shader_s.h"
+#include "shader_cf.h"
 #include "texture.h"
 
 #define ExamleMain(name,width,height)                                               \
