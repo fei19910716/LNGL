@@ -1,5 +1,7 @@
 #pragma once
 
+#include "shader_s.h"
+
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \
 {                                                                                   \

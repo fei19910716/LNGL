@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(3.2.vertex_attribute)
+    add_subdirectory(3.3.shaders_class)
 endif()
 
