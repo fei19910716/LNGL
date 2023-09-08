@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(3.model_loading)
+    add_subdirectory(9.self)
 endif()
 
