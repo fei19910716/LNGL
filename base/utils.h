@@ -3,6 +3,7 @@
 #include "shader_cf.h"
 #include "texture.h"
 #include "fbo.h"
+#include "timer.h"
 
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \
