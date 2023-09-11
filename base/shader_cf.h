@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #include <string>
 #include <fstream>
@@ -101,6 +102,19 @@ public:
     { 
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
     }
+
+    template<typename T>
+	void SetUniform(const std::string& name, const T& value)
+	{
+		if constexpr (std::is_same_v<T, glm::mat4>)
+		{
+			glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_TRUE, &value[0][0]);
+		}
+		else if constexpr (std::is_same_v<T, glm::vec3>)
+		{
+			glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+		}
+	}
 
 private:
     unsigned int ID;

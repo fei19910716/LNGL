@@ -3,7 +3,8 @@
  * doc:  https://austinmorlan.com/posts/entity_component_system/
  * code: https://code.austinmorlan.com/austin/2019-ecs
 */
-
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 
 
@@ -19,7 +20,6 @@
 #include "Systems/PhysicsSystem.hpp"
 #include "Systems/PlayerControlSystem.hpp"
 #include "Systems/RenderSystem.hpp"
-#include "WindowManager.hpp"
 
 #include <random>
 
@@ -27,27 +27,78 @@
 #include "base/utils.h"
 
 
+
+// settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+std::bitset<8> mButtons;
 Coordinator gCoordinator;
 
-static bool quit = false;
+std::shared_ptr<PhysicsSystem> physicsSystem;
+std::shared_ptr<CameraControlSystem> cameraControlSystem;
+std::shared_ptr<PlayerControlSystem> playerControlSystem;
+std::shared_ptr<RenderSystem> renderSystem;
 
-
-void QuitHandler(Event& event)
+// callbacks
+void processInput(GLFWwindow *window)
 {
-	quit = true;
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+
+	bool buttonStateChanged = true;
+
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE))
+	{
+		gCoordinator.SendEvent(Events::Window::QUIT);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_W))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::W));
+	}
+	else if (glfwGetKey(window, GLFW_KEY_A))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::A));
+	}
+	else if (glfwGetKey(window, GLFW_KEY_S))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::S));
+	}
+	else if (glfwGetKey(window, GLFW_KEY_D))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::D));
+	}
+	else if (glfwGetKey(window, GLFW_KEY_Q))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::Q));
+	}
+	else if (glfwGetKey(window, GLFW_KEY_E))
+	{
+		mButtons.set(static_cast<std::size_t>(InputButtons::E));
+	}
+	else
+	{
+		buttonStateChanged = false;
+	}
+
+	if (buttonStateChanged)
+	{
+		Event event(Events::Window::INPUT);
+		event.SetParam(Events::Window::Input::INPUT, mButtons);
+		gCoordinator.SendEvent(event);
+	}
 }
 
-int main()
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+
+void init()
 {
 	gCoordinator.Init();
-
-
-	WindowManager windowManager;
-	windowManager.Init("Nexus", 1920, 1080, 0, 0);
-
-
-	gCoordinator.AddEventListener(FUNCTION_LISTENER(Events::Window::QUIT, QuitHandler));
-
 
 	gCoordinator.RegisterComponent<Camera>();
 	gCoordinator.RegisterComponent<Gravity>();
@@ -58,7 +109,7 @@ int main()
 	gCoordinator.RegisterComponent<Transform>();
 
 
-	auto physicsSystem = gCoordinator.RegisterSystem<PhysicsSystem>();
+	physicsSystem = gCoordinator.RegisterSystem<PhysicsSystem>();
 	{
 		Signature signature;
 		signature.set(gCoordinator.GetComponentType<Gravity>());
@@ -70,7 +121,7 @@ int main()
 	physicsSystem->Init();
 
 
-	auto cameraControlSystem = gCoordinator.RegisterSystem<CameraControlSystem>();
+	cameraControlSystem = gCoordinator.RegisterSystem<CameraControlSystem>();
 	{
 		Signature signature;
 		signature.set(gCoordinator.GetComponentType<Camera>());
@@ -81,7 +132,7 @@ int main()
 	cameraControlSystem->Init();
 
 
-	auto playerControlSystem = gCoordinator.RegisterSystem<PlayerControlSystem>();
+	playerControlSystem = gCoordinator.RegisterSystem<PlayerControlSystem>();
 	{
 		Signature signature;
 		signature.set(gCoordinator.GetComponentType<Player>());
@@ -92,7 +143,7 @@ int main()
 	playerControlSystem->Init();
 
 
-	auto renderSystem = gCoordinator.RegisterSystem<RenderSystem>();
+	renderSystem = gCoordinator.RegisterSystem<RenderSystem>();
 	{
 		Signature signature;
 		signature.set(gCoordinator.GetComponentType<Renderable>());
@@ -120,55 +171,56 @@ int main()
 
 		gCoordinator.AddComponent<Gravity>(
 			entity,
-			{Vec3(0.0f, randGravity(generator), 0.0f)});
+			{glm::vec3(0.0f, randGravity(generator), 0.0f)});
 
 		gCoordinator.AddComponent(
 			entity,
 			RigidBody{
-				.velocity = Vec3(0.0f, 0.0f, 0.0f),
-				.acceleration = Vec3(0.0f, 0.0f, 0.0f)
+				.velocity = glm::vec3(0.0f, 0.0f, 0.0f),
+				.acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
 			});
 
 		gCoordinator.AddComponent(
 			entity,
 			Transform{
-				.position = Vec3(randPosition(generator), randPosition(generator), randPosition(generator)),
-				.rotation = Vec3(randRotation(generator), randRotation(generator), randRotation(generator)),
-				.scale = Vec3(scale, scale, scale)
+				.position = glm::vec3(randPosition(generator), randPosition(generator), randPosition(generator)),
+				.rotation = glm::vec3(randRotation(generator), randRotation(generator), randRotation(generator)),
+				.scale = glm::vec3(scale, scale, scale)
 			});
 
 		gCoordinator.AddComponent(
 			entity,
 			Renderable{
-				.color = Vec3(randColor(generator), randColor(generator), randColor(generator))
+				.color = glm::vec3(randColor(generator), randColor(generator), randColor(generator))
 			});
 	}
-
-	float dt = 0.0f;
-
-	while (!quit)
-	{
-		Timer::Start();
-
-		windowManager.ProcessEvents();
-
-		playerControlSystem->Update(dt);
-
-		cameraControlSystem->Update(dt);
-
-		physicsSystem->Update(dt);
-
-		renderSystem->Update(dt);
-
-		windowManager.Update();
-
-		Timer::End();
-
-		dt = Timer::Duration();
-	}
-
-
-	windowManager.Shutdown();
-
-	return 0;
 }
+
+
+void render()
+{
+	static float dt = 0.0f;
+	static Timer timer;
+	
+	timer.Start();
+
+	playerControlSystem->Update(dt);
+
+	cameraControlSystem->Update(dt);
+
+	physicsSystem->Update(dt);
+
+	renderSystem->Update(dt);
+
+
+	timer.End();
+
+	dt = timer.Duration();
+}
+
+void clean()
+{
+
+}
+
+ExamleMain("ecs", SCR_WIDTH, SCR_HEIGHT)

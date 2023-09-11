@@ -5,6 +5,8 @@
 #include "fbo.h"
 #include "timer.h"
 
+#include <glm/glm.hpp>
+
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \
 {                                                                                   \
