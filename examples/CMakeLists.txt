@@ -11,5 +11,6 @@ if(BUILD_ALL_SAMPLES)
     endforeach()
 else()
     add_subdirectory(frame_graph)
+    add_subdirectory(1.getting_started)
 endif()
 

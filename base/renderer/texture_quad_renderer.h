@@ -1,42 +1,29 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#pragma once
+
 
 #include "base/utils.h"
 
-#include <iostream>
+#include "renderer.h"
 
-
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-Shader ourShader;
-Texture2D texture2D;
-unsigned int VBO, VAO, EBO;
-
-// callbacks
-void processInput(GLFWwindow *window)
+class TextureQuadRenderer: public Renderer
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+public:
+
+TextureQuadRenderer(const std::string& vs,const std::string& fs,const std::string& path):
+vs(vs),fs(fs),path(path)
+{
+    init();
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-void init()
+void init() override
 {
     // build and compile our shader zprogram
     // ------------------------------------
-    ourShader.LoadShaderStage("4.1.texture.vs", GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage("4.1.texture.fs", GL_FRAGMENT_SHADER);
+    ourShader.LoadShaderStage(vs.c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(fs.c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
 
-    // load and create a texture 
-    // -------------------------
-    texture2D.FromImage(FileSystem::getPath("resources/textures/awesomeface.png").c_str(),false);
-
+    texture2D.FromPBO(FileSystem::getPath(path).c_str(),false);
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -73,17 +60,10 @@ void init()
     // texture coord attribute
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
-
 }
 
-
-void render()
+void render() override
 {
-    // render
-    // ------
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     // bind Texture
     texture2D.Bind(GL_TEXTURE0);
 
@@ -93,14 +73,12 @@ void render()
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
+private:
+    Shader ourShader;
+    Texture2D texture2D;
+    unsigned int VBO, VAO, EBO;
 
 
-void clean()
-{
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-}
+    std::string vs, fs ,path;
 
-
-ExamleMain("4.1.textures", SCR_WIDTH, SCR_HEIGHT)
+};

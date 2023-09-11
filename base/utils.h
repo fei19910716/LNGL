@@ -2,6 +2,7 @@
 
 #include "shader_cf.h"
 #include "texture.h"
+#include "fbo.h"
 
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \

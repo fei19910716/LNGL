@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(4.4.textures_wrap_mode)
+    add_subdirectory(4.1.textures)
 endif()
 
