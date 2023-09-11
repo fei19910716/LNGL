@@ -2,8 +2,13 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define __STDC_LIB_EXT1__
+#include "stb/stb_image_write.h"
 
 #include "filesystem.h"
+
+#include <iostream>
 
 class Texture2D
 {
@@ -82,7 +87,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, 0);
 
 
-            { // 使用两个PBO交替上传不同的纹理渲染
+            { // 纹理数据每帧变化时，可以使用两个PBO交替上传不同的纹理渲染
                 // if(pboMode == 1)
                 // {
                 //     // In single PBO mode, the index and nextIndex are set to 0

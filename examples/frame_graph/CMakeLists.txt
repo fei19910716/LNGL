@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(frame_graph)
+    add_subdirectory(hello_triangle_frame_graph)
 endif()
 

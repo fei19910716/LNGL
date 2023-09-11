@@ -11,5 +11,6 @@ if(BUILD_ALL_SAMPLES)
     endforeach()
 else()
     add_subdirectory(pboUnpack)
+    add_subdirectory(pboPackColor)
 endif()
 
