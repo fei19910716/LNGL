@@ -64,6 +64,7 @@ void init() override
 
 void render() override
 {
+    
     // bind Texture
     texture2D.Bind(GL_TEXTURE0);
 
