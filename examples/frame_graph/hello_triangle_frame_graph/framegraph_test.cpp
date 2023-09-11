@@ -33,8 +33,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void init()
 {
-    texture_renderer = new TextureQuadRenderer("4.1.texture.vs","4.1.texture.fs","resources/textures/awesomeface.png");
-    triagnle_renderer = new TriangleRenderer("3.3.shader.vs","3.3.shader.fs");
+    texture_renderer = new TextureQuadRenderer("texture.vs","texture.fs","resources/textures/awesomeface.png");
+    triagnle_renderer = new TriangleRenderer("triangle.vs","triangle.fs");
     blur_renderer = new GuassianBlurRenderer("gaussian_blur.vs","gaussian_blur.fs");
     present_renderer = new PresentRenderer("present.vs","present.fs");
 }
@@ -44,18 +44,18 @@ void render()
 {
     fg::framegraph framegraph;
 
-    auto retained_resource = framegraph.add_retained_resource("Backbuffer", 
-                                                              FrameBuffer::Description(), 
-                                                              new FrameBuffer);
+    auto back_buffer = framegraph.add_retained_resource("Backbuffer", 
+                                                        FrameBuffer::Description(), 
+                                                        new FrameBuffer);
 
     // 1st render task declaration.
-    struct render_task_0_data
+    struct clear_pass_data
     {
       fbo_resource* output;
     };
-    auto render_task_0 = framegraph.add_render_task<render_task_0_data>(
+    auto clear_pass_task = framegraph.add_render_task<clear_pass_data>(
     "Clear Pass",
-    [&] (render_task_0_data& data, fg::render_task_builder& builder)
+    [&] (clear_pass_data& data, fg::render_task_builder& builder)
     {
       FrameBuffer::Description desc;
       {
@@ -67,7 +67,7 @@ void render()
 
       data.output = builder.create<fbo_resource>("FBO",desc);
     },
-    [=] (const render_task_0_data& data)
+    [=] (const clear_pass_data& data)
     {
       data.output->actual()->Bind();
 
@@ -75,21 +75,21 @@ void render()
       glClear(GL_COLOR_BUFFER_BIT);
 
     });
-    auto& data_0 = render_task_0->data();
+    auto& clear_pass_out_data = clear_pass_task->data();
 
 
     // // 2st render task declaration.
-    struct render_task_1_data
+    struct texture_pass_data
     {
       fbo_resource* output;
     };
-    auto render_task_1 = framegraph.add_render_task<render_task_1_data>(
+    auto texture_pass_task = framegraph.add_render_task<texture_pass_data>(
     "Texture Pass",
-    [&] (render_task_1_data& data, fg::render_task_builder& builder)
+    [&] (texture_pass_data& data, fg::render_task_builder& builder)
     {
-      data.output = builder.write<fbo_resource>(data_0.output);
+      data.output = builder.write<fbo_resource>(clear_pass_out_data.output);
     },
-    [=] (const render_task_1_data& data)
+    [=] (const texture_pass_data& data)
     {
       data.output->actual()->Bind();
 
@@ -97,21 +97,21 @@ void render()
 
     });
 
-    auto& data_1 = render_task_1->data();
+    auto& texture_pass_out_data = texture_pass_task->data();
 
 
     // 3st render task declaration.
-    struct render_task_2_data
+    struct triangle_pass_data
     {
       fbo_resource* output;
     };
-    auto render_task_2 = framegraph.add_render_task<render_task_2_data>(
+    auto triangle_pass_task = framegraph.add_render_task<triangle_pass_data>(
     "Triangle Pass",
-    [&] (render_task_2_data& data, fg::render_task_builder& builder)
+    [&] (triangle_pass_data& data, fg::render_task_builder& builder)
     {
-      data.output = builder.write<fbo_resource>(data_1.output);
+      data.output = builder.write<fbo_resource>(texture_pass_out_data.output);
     },
-    [=] (const render_task_2_data& data)
+    [=] (const triangle_pass_data& data)
     {
       data.output->actual()->Bind();
       
@@ -119,22 +119,22 @@ void render()
 
     });
 
-    auto& data_2 = render_task_2->data();
+    auto& triangle_pass_out_data = triangle_pass_task->data();
 
     // 4st render task declaration.
-    struct blur_data
+    struct blur_pass_data
     {
       fbo_resource* input;
       fbo_resource* output;
     };
-    auto blur_task = framegraph.add_render_task<blur_data>(
+    auto blur_pass_task = framegraph.add_render_task<blur_pass_data>(
     "Blur Pass",
-    [&] (blur_data& data, fg::render_task_builder& builder)
+    [&] (blur_pass_data& data, fg::render_task_builder& builder)
     {
-      data.input = builder.read<fbo_resource>(data_2.output);
-      data.output = builder.write<fbo_resource>(data_2.output);
+      data.input = builder.read<fbo_resource>(triangle_pass_out_data.output);
+      data.output = builder.write<fbo_resource>(triangle_pass_out_data.output);
     },
-    [=] (const blur_data& data)
+    [=] (const blur_pass_data& data)
     {
       
       data.output->actual()->Bind();
@@ -143,22 +143,22 @@ void render()
 
     });
 
-    auto& blur_out_data = blur_task->data();
+    auto& blur_pass_out_data = blur_pass_task->data();
 
     // 4st render task declaration.
-    struct present_data
+    struct present_pass_data
     {
       fbo_resource* input;
       fbo_resource* output;
     };
-    auto present_task = framegraph.add_render_task<present_data>(
+    auto present_pass_task = framegraph.add_render_task<present_pass_data>(
     "Present Pass",
-    [&] (present_data& data, fg::render_task_builder& builder)
+    [&] (present_pass_data& data, fg::render_task_builder& builder)
     {
-      data.input = builder.read<fbo_resource>(data_1.output);
-      data.output = builder.write<fbo_resource>(retained_resource);
+      data.input = builder.read<fbo_resource>(blur_pass_out_data.output);
+      data.output = builder.write<fbo_resource>(back_buffer);
     },
-    [=] (const present_data& data)
+    [=] (const present_pass_data& data)
     {
       
       data.output->actual()->Bind();
