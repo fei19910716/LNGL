@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(2020)
+    add_subdirectory(1.scene)
 endif()
 
