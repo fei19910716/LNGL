@@ -46,9 +46,11 @@ void init() override
     glEnableVertexAttribArray(1);
 }
 
-void setMat4(const std::string &name, const glm::mat4 &mat)
+template<typename T>
+void SetUniform(const std::string& name, const T& value)
 {
-    ourShader.SetUniform<glm::mat4>(name, mat);
+    ourShader.use();
+    ourShader.SetUniform<T>(name,value);
 }
 
 void render() override

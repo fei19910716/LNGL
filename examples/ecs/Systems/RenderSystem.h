@@ -80,7 +80,7 @@ void RenderSystem::Update(float dt)
 		auto const& transform  = gCoordinator.GetComponent<Transform>(entity);
 		auto const& renderable = gCoordinator.GetComponent<Renderable>(entity);
 
-
+		
 		switch (renderable.renderableType)
 		{
 		case RenderableType::TextureQuad:
@@ -123,9 +123,11 @@ void RenderSystem::Update(float dt)
 			[=] (const triangle_pass_data& data)
 			{
 			data.output->actual()->Bind();
-			triagnle_renderer->setMat4("model",glm::mat4(1.0f));
-			triagnle_renderer->render();
 
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, transform.position);
+			triagnle_renderer->SetUniform<glm::mat4>("model",model);
+			triagnle_renderer->render();
 			});
 
 			pass_out_data = triangle_pass_task->data().output;

@@ -108,11 +108,11 @@ public:
 	{
 		if constexpr (std::is_same_v<T, glm::mat4>)
 		{
-			glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_TRUE, &value[0][0]);
+			glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 		}
 		else if constexpr (std::is_same_v<T, glm::vec3>)
 		{
-			glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+			glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 		}
 	}
 

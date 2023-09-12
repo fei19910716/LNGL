@@ -73,6 +73,8 @@ void processInput(GLFWwindow *window)
 		event.SetParam(Events::Window::Input::INPUT, mButtons);
 		gCoordinator.SendEvent(event);
 	}
+
+	mButtons.reset();
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -170,18 +172,18 @@ void init()
 		{}
 	);
 
-	gCoordinator.AddComponent<Gravity>(
-		entity,
-		{ glm::vec3(0.0f, 2.0f, 0.0f) }
-	);
+	// gCoordinator.AddComponent<Gravity>(
+	// 	entity,
+	// 	{ glm::vec3(0.0f, 2.0f, 0.0f) }
+	// );
 
-	gCoordinator.AddComponent<RigidBody>(
-		entity,
-		{ 
-			glm::vec3(0.0f, 0.0f, 0.0f), 
-			glm::vec3(0.0f, 0.0f, 0.0f) 
-		}
-	);
+	// gCoordinator.AddComponent<RigidBody>(
+	// 	entity,
+	// 	{ 
+	// 		glm::vec3(0.0f, 0.0f, 0.0f), 
+	// 		glm::vec3(0.0f, 0.0f, 0.0f) 
+	// 	}
+	// );
 
 	gCoordinator.AddComponent<Renderable>(
 		entity,
