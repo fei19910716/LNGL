@@ -61,21 +61,21 @@ struct Container
     }
 };
 
-
-struct MessageQueue
+template<typename T>
+struct ContainerQueue
 {
-    std::atomic<Container<Message*>> queue; // global variable
+    std::atomic<Container<T>> queue; // global variable
 
     std::mutex mtx;
     std::unique_lock<std::mutex> lock;
     std::condition_variable cv;
 
-    Message* pop()
+    T pop()
     {
-        Message* msg;
+        T msg;
 
-        Container<Message*> s = queue.load();
-        Container<Message*> new_s;
+        Container<T> s = queue.load();
+        Container<T> new_s;
         do {
             
             new_s = s;
@@ -86,16 +86,16 @@ struct MessageQueue
             }
             
             msg = new_s.front();
-                new_s.pop();
+            new_s.pop();
         } while (!queue.compare_exchange_strong(s, new_s));
         cv.notify_one();
         return msg;
     }
 
-    void push(Message* message)
+    void push(T message)
     {
-        Container<Message*> s = queue.load();
-        Container<Message*> new_s;
+        Container<T> s = queue.load();
+        Container<T> new_s;
         do {
             new_s = s;
 
@@ -112,55 +112,6 @@ struct MessageQueue
         cv.notify_one();
     }
 };
-
-struct TextureQueue
-{
-    std::atomic<Container<unsigned int>> queue;
-    std::mutex mtx;
-    std::unique_lock<std::mutex> lock;
-    std::condition_variable cv;
-
-    unsigned int pop()
-    {
-        unsigned int id = GL_INVALID_VALUE;
-
-        Container<unsigned int> s = queue.load();
-        Container<unsigned int> new_s;
-        do {
-            new_s = s;
-            
-            if(new_s.empty()){
-                std::unique_lock<std::mutex> lock(mtx);
-                cv.wait(lock);
-                std::cout << "texture is empty" << std::endl;
-            }
-            
-            id = new_s.front();
-                new_s.pop();
-        } while (!queue.compare_exchange_strong(s, new_s));
-        cv.notify_one();
-        return id;
-    }
-
-    void push(unsigned int message)
-    {
-        Container<unsigned int> s = queue.load();
-        Container<unsigned int> new_s;
-        do {
-            
-            new_s = s;
-            if(new_s.full()){
-                std::unique_lock<std::mutex> lock(mtx);
-                cv.wait(lock);
-                std::cout << "texture is full" << std::endl;
-            }
-            
-            new_s.push(message);
-        } while (!queue.compare_exchange_strong(s, new_s));
-        cv.notify_one();
-    }
-};
-
 
 
 class RenderThread
@@ -185,7 +136,7 @@ public:
         this->offscreen_context = window;
     }
 
-    void start(MessageQueue& message_queue, TextureQueue& texture_queue)
+    void start(ContainerQueue<Message*>& message_queue, ContainerQueue<unsigned int>& texture_queue)
     {
         this->thread_run = true;
         mThread = std::thread(&RenderThread::run,this, std::ref(message_queue), std::ref(texture_queue));
@@ -197,7 +148,7 @@ public:
         this->thread_run = false;
     }
 
-    void run(MessageQueue& message_queue, TextureQueue& texture_queue)
+    void run(ContainerQueue<Message*>& message_queue, ContainerQueue<unsigned int>& texture_queue)
     {
         glfwMakeContextCurrent(offscreen_context);
 

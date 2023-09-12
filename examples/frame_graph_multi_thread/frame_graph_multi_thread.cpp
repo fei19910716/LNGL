@@ -16,8 +16,8 @@ const unsigned int SCR_HEIGHT = 600;
 
 
 RenderThread render_thread;
-MessageQueue message_queue;
-TextureQueue texture_queue;
+ContainerQueue<Message*> message_queue;
+ContainerQueue<unsigned int> texture_queue;
 
 PresentRenderer* present_renderer;
 
@@ -46,7 +46,7 @@ void init(GLFWwindow *window)
     render_thread.start(message_queue,texture_queue);
 }
 
-void run(MessageQueue& message_queue, TextureQueue& texture_queue)
+void run(ContainerQueue<Message*>& message_queue, ContainerQueue<unsigned int>& texture_queue)
 {
   {
     // update the message, push to the queue
