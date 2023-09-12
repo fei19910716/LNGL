@@ -13,10 +13,10 @@
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-Renderer* texture_renderer;
-Renderer* triagnle_renderer;
-Renderer* blur_renderer;
-Renderer* present_renderer;
+TextureQuadRenderer* texture_renderer;
+TriangleRenderer* triagnle_renderer;
+GuassianBlurRenderer* blur_renderer;
+PresentRenderer* present_renderer;
 
 // callbacks
 void processInput(GLFWwindow *window)
@@ -114,7 +114,8 @@ void render()
     [=] (const triangle_pass_data& data)
     {
       data.output->actual()->Bind();
-      
+      glm::mat4 model = glm::mat4(1.0f);
+			triagnle_renderer->SetUniform<glm::mat4>("model",model);
       triagnle_renderer->render();
 
     });
@@ -181,4 +182,4 @@ void clean()
 }
 
 
-ExamleMain("hello_triangle_frame_graph", SCR_WIDTH, SCR_HEIGHT)
+ExamleMain("frame_graph_multi_thread", SCR_WIDTH, SCR_HEIGHT)

@@ -250,4 +250,4 @@ void clean()
 
 }
 
-ExamleMain("ecs", SCR_WIDTH, SCR_HEIGHT)
+ExamleMain("frame_graph_ecs", SCR_WIDTH, SCR_HEIGHT)
