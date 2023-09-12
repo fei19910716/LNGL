@@ -2,7 +2,14 @@
 
 #include <glm/glm.hpp>
 
+enum RenderableType
+{
+	Triangle,
+	TextureQuad,
+	Present,
+	GaussianBlur
+};
 struct Renderable
 {
-	glm::vec3 color;
+	RenderableType renderableType;
 };

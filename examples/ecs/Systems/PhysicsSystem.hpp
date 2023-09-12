@@ -1,7 +1,11 @@
 #pragma once
 
 #include "base/ecs/System.hpp"
-
+#include "Components/Gravity.hpp"
+#include "Components/RigidBody.hpp"
+#include "Components/Thrust.hpp"
+#include "Components/Transform.hpp"
+#include "base/ecs/Coordinator.hpp"
 
 class PhysicsSystem : public System
 {
@@ -10,14 +14,6 @@ public:
 
 	void Update(float dt);
 };
-
-
-#include "Components/Gravity.hpp"
-#include "Components/RigidBody.hpp"
-#include "Components/Thrust.hpp"
-#include "Components/Transform.hpp"
-#include "base/ecs/Coordinator.hpp"
-
 
 extern Coordinator gCoordinator;
 

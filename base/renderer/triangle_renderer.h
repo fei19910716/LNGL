@@ -46,6 +46,11 @@ void init() override
     glEnableVertexAttribArray(1);
 }
 
+void setMat4(const std::string &name, const glm::mat4 &mat)
+{
+    ourShader.SetUniform<glm::mat4>(name, mat);
+}
+
 void render() override
 {
     // render the triangle

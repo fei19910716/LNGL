@@ -19,7 +19,7 @@
 #include "Systems/CameraControlSystem.hpp"
 #include "Systems/PhysicsSystem.hpp"
 #include "Systems/PlayerControlSystem.hpp"
-#include "Systems/RenderSystem.hpp"
+#include "Systems/RenderSystem.h"
 
 #include <random>
 
@@ -46,14 +46,8 @@ void processInput(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-
-	bool buttonStateChanged = true;
-
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE))
-	{
-		gCoordinator.SendEvent(Events::Window::QUIT);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_W))
+	bool statusChanged = true;
+    if (glfwGetKey(window, GLFW_KEY_W))
 	{
 		mButtons.set(static_cast<std::size_t>(InputButtons::W));
 	}
@@ -69,21 +63,12 @@ void processInput(GLFWwindow *window)
 	{
 		mButtons.set(static_cast<std::size_t>(InputButtons::D));
 	}
-	else if (glfwGetKey(window, GLFW_KEY_Q))
-	{
-		mButtons.set(static_cast<std::size_t>(InputButtons::Q));
-	}
-	else if (glfwGetKey(window, GLFW_KEY_E))
-	{
-		mButtons.set(static_cast<std::size_t>(InputButtons::E));
-	}
 	else
 	{
-		buttonStateChanged = false;
+		statusChanged = false;
 	}
 
-	if (buttonStateChanged)
-	{
+	if(statusChanged){
 		Event event(Events::Window::INPUT);
 		event.SetParam(Events::Window::Input::INPUT, mButtons);
 		gCoordinator.SendEvent(event);
@@ -109,6 +94,17 @@ void init()
 	gCoordinator.RegisterComponent<Transform>();
 
 
+	cameraControlSystem = gCoordinator.RegisterSystem<CameraControlSystem>();
+	{
+		Signature signature;
+		signature.set(gCoordinator.GetComponentType<Camera>());
+		signature.set(gCoordinator.GetComponentType<Transform>());
+		gCoordinator.SetSystemSignature<CameraControlSystem>(signature);
+	}
+
+	cameraControlSystem->Init();
+
+
 	physicsSystem = gCoordinator.RegisterSystem<PhysicsSystem>();
 	{
 		Signature signature;
@@ -119,17 +115,6 @@ void init()
 	}
 
 	physicsSystem->Init();
-
-
-	cameraControlSystem = gCoordinator.RegisterSystem<CameraControlSystem>();
-	{
-		Signature signature;
-		signature.set(gCoordinator.GetComponentType<Camera>());
-		signature.set(gCoordinator.GetComponentType<Transform>());
-		gCoordinator.SetSystemSignature<CameraControlSystem>(signature);
-	}
-
-	cameraControlSystem->Init();
 
 
 	playerControlSystem = gCoordinator.RegisterSystem<PlayerControlSystem>();
@@ -151,49 +136,89 @@ void init()
 		gCoordinator.SetSystemSignature<RenderSystem>(signature);
 	}
 
-	renderSystem->Init();
+	renderSystem->Init(SCR_WIDTH,SCR_HEIGHT);
 
-	std::vector<Entity> entities(MAX_ENTITIES - 1);
+	// TextureQuad
+	Entity entity = gCoordinator.CreateEntity();
+	gCoordinator.AddComponent<Transform>(
+		entity,
+		{
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		}
+	);
 
-	std::default_random_engine generator;
-	std::uniform_real_distribution<float> randPosition(-100.0f, 100.0f);
-	std::uniform_real_distribution<float> randRotation(0.0f, 3.0f);
-	std::uniform_real_distribution<float> randScale(3.0f, 5.0f);
-	std::uniform_real_distribution<float> randColor(0.0f, 1.0f);
-	std::uniform_real_distribution<float> randGravity(-10.0f, -1.0f);
+	gCoordinator.AddComponent<Renderable>(
+		entity,
+		{RenderableType::TextureQuad}
+	);
 
-	float scale = randScale(generator);
+	// Triangle
+	entity = gCoordinator.CreateEntity();
+	gCoordinator.AddComponent<Transform>(
+		entity,
+		{
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		}
+	);
 
-	for (auto& entity : entities)
-	{
-		entity = gCoordinator.CreateEntity();
-		gCoordinator.AddComponent(entity, Player{});
+	gCoordinator.AddComponent<Player>(
+		entity, 
+		{}
+	);
 
-		gCoordinator.AddComponent<Gravity>(
-			entity,
-			{glm::vec3(0.0f, randGravity(generator), 0.0f)});
+	gCoordinator.AddComponent<Gravity>(
+		entity,
+		{ glm::vec3(0.0f, 2.0f, 0.0f) }
+	);
 
-		gCoordinator.AddComponent(
-			entity,
-			RigidBody{
-				.velocity = glm::vec3(0.0f, 0.0f, 0.0f),
-				.acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
-			});
+	gCoordinator.AddComponent<RigidBody>(
+		entity,
+		{ 
+			glm::vec3(0.0f, 0.0f, 0.0f), 
+			glm::vec3(0.0f, 0.0f, 0.0f) 
+		}
+	);
 
-		gCoordinator.AddComponent(
-			entity,
-			Transform{
-				.position = glm::vec3(randPosition(generator), randPosition(generator), randPosition(generator)),
-				.rotation = glm::vec3(randRotation(generator), randRotation(generator), randRotation(generator)),
-				.scale = glm::vec3(scale, scale, scale)
-			});
+	gCoordinator.AddComponent<Renderable>(
+		entity,
+		{RenderableType::Triangle}
+	);
 
-		gCoordinator.AddComponent(
-			entity,
-			Renderable{
-				.color = glm::vec3(randColor(generator), randColor(generator), randColor(generator))
-			});
-	}
+	// Blur
+	entity = gCoordinator.CreateEntity();
+	gCoordinator.AddComponent<Transform>(
+		entity,
+		{
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		}
+	);
+
+	gCoordinator.AddComponent<Renderable>(
+		entity,
+		{RenderableType::GaussianBlur}
+	);
+
+	// Present
+	entity = gCoordinator.CreateEntity();
+	gCoordinator.AddComponent<Transform>(
+		entity,
+		{
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		}
+	);
+
+	gCoordinator.AddComponent<Renderable>(
+		entity,
+		{RenderableType::Present}
+	);
 }
 
 
