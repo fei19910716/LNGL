@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(1-1.pbo)
+    add_subdirectory(pbo)
 endif()
 
