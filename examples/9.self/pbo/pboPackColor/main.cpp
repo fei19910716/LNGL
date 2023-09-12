@@ -132,13 +132,14 @@ void render()
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, pboIds[index]);
     glReadPixels(0, 0, SCR_WIDTH, SCR_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    // glReadPixels(0, 0, SCR_WIDTH, SCR_HEIGHT, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, pboIds[nextIndex]);
     GLubyte* src = (GLubyte*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
     if(src)
     {
         // change brightness
-        stbi_write_png("pboPack.png",SCR_WIDTH,SCR_HEIGHT,4,src,0);
+        stbi_write_png("pboPackColor.png",SCR_WIDTH,SCR_HEIGHT,4,src,0);
         glUnmapBuffer(GL_PIXEL_PACK_BUFFER);        // release pointer to the mapped buffer
     }
     glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
