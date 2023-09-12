@@ -35,7 +35,7 @@ if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))                        
     return -1;                                                                      \
 }                                                                                   \
                                                                                     \
-init();                                                                             \
+init(window);                                                                       \
                                                                                     \
 do                                                                                  \
 {                                                                                   \

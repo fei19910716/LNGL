@@ -83,7 +83,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 
-void init()
+void init(GLFWwindow *window)
 {
 	gCoordinator.Init();
 

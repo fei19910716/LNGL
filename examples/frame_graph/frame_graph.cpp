@@ -31,7 +31,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 
-void init()
+void init(GLFWwindow *window)
 {
     texture_renderer = new TextureQuadRenderer("texture.vs","texture.fs","resources/textures/awesomeface.png");
     triagnle_renderer = new TriangleRenderer("triangle.vs","triangle.fs");

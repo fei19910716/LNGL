@@ -86,22 +86,6 @@ public:
         glUseProgram(ID); 
     }
 
-    // utility uniform functions
-    // ------------------------------------------------------------------------
-    void setBool(const std::string &name, bool value) const
-    {         
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 
-    }
-    // ------------------------------------------------------------------------
-    void setInt(const std::string &name, int value) const
-    { 
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), value); 
-    }
-    // ------------------------------------------------------------------------
-    void setFloat(const std::string &name, float value) const
-    { 
-        glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
-    }
 
     template<typename T>
 	void SetUniform(const std::string& name, const T& value)
@@ -113,6 +97,14 @@ public:
 		else if constexpr (std::is_same_v<T, glm::vec3>)
 		{
 			glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
+		}
+        else if constexpr (std::is_same_v<T, float>)
+		{
+			glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
+		}
+        else if constexpr (std::is_same_v<T, bool> || std::is_same_v<T, int>)
+		{
+			glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 
 		}
 	}
 
