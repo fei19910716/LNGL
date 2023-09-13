@@ -21,7 +21,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void init()
+void init(GLFWwindow *window)
 {
 
 }
@@ -29,6 +29,11 @@ void init()
 void render()
 {
 
+}
+
+void clean()
+{
+    
 }
 
 

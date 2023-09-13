@@ -21,7 +21,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void init()
+void init(GLFWwindow *window)
 {
 
 }
@@ -32,6 +32,10 @@ void render()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void clean()
+{
+    
+}
 
 ExamleMain("hello_window_clear", SCR_WIDTH, SCR_HEIGHT)
 
