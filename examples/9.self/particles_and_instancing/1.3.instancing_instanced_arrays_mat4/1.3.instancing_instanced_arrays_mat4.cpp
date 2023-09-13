@@ -49,7 +49,7 @@ void init(GLFWwindow* window)
             translation.y = (float)y / 10.0f + offset;
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model,glm::vec3(translation,0.0f));
-            model_mats[index] = model;
+            model_mats[index++] = model;
         }
     }
     unsigned int instanceVBO;
@@ -85,19 +85,19 @@ void init(GLFWwindow* window)
     
     ///---KEYCODE---///
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // this attribute comes from a different vertex buffer
+        glEnableVertexAttribArray(2); 
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)0);
         glEnableVertexAttribArray(3); 
-    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)0);
-    glEnableVertexAttribArray(4); 
-    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(1 * sizeof(glm::vec4)));
-    glEnableVertexAttribArray(5); 
-    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(2 * sizeof(glm::vec4)));
-    glEnableVertexAttribArray(6); 
-    glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(3 * sizeof(glm::vec4)));
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(1 * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(4); 
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(2 * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(5); 
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(3 * sizeof(glm::vec4)));
 
+    glVertexAttribDivisor(2, 1);
     glVertexAttribDivisor(3, 1);
     glVertexAttribDivisor(4, 1);
     glVertexAttribDivisor(5, 1);
-    glVertexAttribDivisor(6, 1);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     /**
@@ -123,7 +123,7 @@ void render()
     shader.use();
     glBindVertexArray(quadVAO);
     glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100); // 100 triangles of 6 vertices each
-    glBindVertexArray(0);
+    glBindVertexArray(0); 
 }
 
 void clean()
@@ -132,4 +132,4 @@ void clean()
 }
 
 
-ExamleMain("instancing_quads", SCR_WIDTH, SCR_HEIGHT)
+ExamleMain("instanced_array_mat4_instancing", SCR_WIDTH, SCR_HEIGHT)
