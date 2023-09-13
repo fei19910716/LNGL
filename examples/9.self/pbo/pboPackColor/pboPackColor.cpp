@@ -41,6 +41,9 @@ void init(GLFWwindow *window)
 
 void render()
 {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     renderer->render();
 
     ///**KEYCODE**///
@@ -50,7 +53,6 @@ void render()
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, pboIds[index]);
     glReadPixels(0, 0, SCR_WIDTH, SCR_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    // glReadPixels(0, 0, SCR_WIDTH, SCR_HEIGHT, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, pboIds[nextIndex]);
     GLubyte* src = (GLubyte*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);

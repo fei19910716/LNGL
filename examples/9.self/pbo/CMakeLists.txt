@@ -12,6 +12,6 @@ if(BUILD_ALL_SAMPLES)
 else()
     add_subdirectory(pboUnpack)
     add_subdirectory(pboPackColor)
-    add_subdirectory(pboPackDepth)
+    add_subdirectory(pboPackFromFbo)
 endif()
 

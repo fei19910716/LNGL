@@ -76,6 +76,11 @@ public:
         glBindTexture(GL_TEXTURE_2D, color);
     }
 
+    unsigned int ID() const
+    {
+        return framebuffer;
+    }
+
 private:
     std::string name;
     unsigned int framebuffer = 0, color, depth;
