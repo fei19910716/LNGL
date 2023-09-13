@@ -5,6 +5,9 @@
 
 #include "renderer.h"
 
+/**
+ * this is colored triangle without texture, without ibo.
+*/
 class TriangleRenderer: public Renderer
 {
 public:

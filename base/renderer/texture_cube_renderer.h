@@ -5,6 +5,9 @@
 
 #include "renderer.h"
 
+/**
+ * this is textured 3D cube without ibo.
+*/
 class TextureCubeRenderer: public Renderer
 {
 public:

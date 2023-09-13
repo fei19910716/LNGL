@@ -5,6 +5,9 @@
 
 #include "renderer.h"
 
+/**
+ * this is textured 2D quad with ibo.
+*/
 class TextureQuadRenderer: public Renderer
 {
 public:
