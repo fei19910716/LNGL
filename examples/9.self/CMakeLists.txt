@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(pbo)
+    add_subdirectory(particles_and_instancing)
 endif()
 

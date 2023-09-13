@@ -98,6 +98,10 @@ public:
 		{
 			glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 		}
+        else if constexpr (std::is_same_v<T, glm::vec2>)
+		{
+			glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value)); 
+		}
         else if constexpr (std::is_same_v<T, float>)
 		{
 			glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
