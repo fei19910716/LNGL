@@ -33,10 +33,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void init(GLFWwindow *window)
 {
-    texture_renderer = new TextureQuadRenderer("texture.vs","texture.fs","resources/textures/awesomeface.png");
-    triagnle_renderer = new TriangleRenderer("triangle.vs","triangle.fs");
-    blur_renderer = new GuassianBlurRenderer("gaussian_blur.vs","gaussian_blur.fs");
-    present_renderer = new PresentRenderer("present.vs","present.fs");
+    texture_renderer = new TextureQuadRenderer;
+    triagnle_renderer = new TriangleRenderer;
+    blur_renderer = new GuassianBlurRenderer;
+    present_renderer = new PresentRenderer;
 }
 
 

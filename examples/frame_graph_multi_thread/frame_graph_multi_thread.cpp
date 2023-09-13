@@ -67,7 +67,7 @@ void run(ContainerQueue<Message*>& message_queue, ContainerQueue<unsigned int>& 
 
     if(id == GL_INVALID_VALUE) return;
 
-    present_renderer = new PresentRenderer("present.vs","present.fs");
+    present_renderer = new PresentRenderer;
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

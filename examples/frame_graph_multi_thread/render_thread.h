@@ -152,9 +152,9 @@ public:
     {
         glfwMakeContextCurrent(offscreen_context);
 
-        auto texture_renderer = new TextureQuadRenderer("texture.vs","texture.fs","resources/textures/awesomeface.png");
-        auto triagnle_renderer = new TriangleRenderer("triangle.vs","triangle.fs");
-        auto blur_renderer = new GuassianBlurRenderer("gaussian_blur.vs","gaussian_blur.fs");
+        auto texture_renderer = new TextureQuadRenderer;
+        auto triagnle_renderer = new TriangleRenderer;
+        auto blur_renderer = new GuassianBlurRenderer;
         
         while (this->thread_run)
         {

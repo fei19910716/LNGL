@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(4.1.textures)
+    add_subdirectory(6.2.coordinate_systems_depth)
 endif()
 

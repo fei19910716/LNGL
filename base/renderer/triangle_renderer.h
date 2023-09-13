@@ -9,17 +9,19 @@ class TriangleRenderer: public Renderer
 {
 public:
 
-TriangleRenderer(const std::string& vs,const std::string& fs):
-vs(vs),fs(fs)
+TriangleRenderer()
 {
     init();
 }
 
 void init() override
 {
-    ourShader.LoadShaderStage(vs.c_str(), GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage(fs.c_str(), GL_FRAGMENT_SHADER);
+    // build and compile our shader zprogram
+    // ------------------------------------
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/triangle/triangle.vs").c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/triangle/triangle.fs").c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
+
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -64,8 +66,4 @@ void render() override
 private:
     Shader ourShader;
     unsigned int VBO, VAO, EBO;
-
-
-    std::string vs, fs;
-
 };

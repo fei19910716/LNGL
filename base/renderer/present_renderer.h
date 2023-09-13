@@ -9,8 +9,7 @@ class PresentRenderer: public Renderer
 {
 public:
 
-PresentRenderer(const std::string& vs,const std::string& fs):
-vs(vs),fs(fs)
+PresentRenderer()
 {
     init();
 }
@@ -19,8 +18,8 @@ void init() override
 {
     // build and compile our shader zprogram
     // ------------------------------------
-    ourShader.LoadShaderStage(vs.c_str(), GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage(fs.c_str(), GL_FRAGMENT_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/present/present.vs").c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/present/present.fs").c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
 
     float quadVertices[] = {

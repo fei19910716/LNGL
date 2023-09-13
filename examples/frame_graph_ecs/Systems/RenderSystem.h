@@ -85,7 +85,7 @@ void RenderSystem::Update(float dt)
 		{
 		case RenderableType::TextureQuad:
 			{
-			auto texture_renderer = new TextureQuadRenderer("texture.vs","texture.fs","resources/textures/awesomeface.png");
+			auto texture_renderer = new TextureQuadRenderer;
 			struct texture_pass_data
 			{
 				fbo_resource* output;
@@ -109,7 +109,7 @@ void RenderSystem::Update(float dt)
 			break;
 		case RenderableType::Triangle:
 			{
-			auto triagnle_renderer = new TriangleRenderer("triangle.vs","triangle.fs");
+			auto triagnle_renderer = new TriangleRenderer;
 			struct triangle_pass_data
 			{
 			fbo_resource* output;
@@ -137,7 +137,7 @@ void RenderSystem::Update(float dt)
 		
 		case RenderableType::GaussianBlur:
 			{
-			auto blur_renderer = new GuassianBlurRenderer("gaussian_blur.vs","gaussian_blur.fs");
+			auto blur_renderer = new GuassianBlurRenderer;
 			struct blur_pass_data
 			{
 			fbo_resource* input;
@@ -169,7 +169,7 @@ void RenderSystem::Update(float dt)
                                                         FrameBuffer::Description(), 
                                                         new FrameBuffer);
 
-			auto present_renderer = new PresentRenderer("present.vs","present.fs");
+			auto present_renderer = new PresentRenderer;
 			struct present_pass_data
 			{
 			fbo_resource* input;

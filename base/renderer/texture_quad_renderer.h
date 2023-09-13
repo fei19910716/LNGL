@@ -9,8 +9,7 @@ class TextureQuadRenderer: public Renderer
 {
 public:
 
-TextureQuadRenderer(const std::string& vs,const std::string& fs,const std::string& path):
-vs(vs),fs(fs),path(path)
+TextureQuadRenderer()
 {
     init();
 }
@@ -19,11 +18,13 @@ void init() override
 {
     // build and compile our shader zprogram
     // ------------------------------------
-    ourShader.LoadShaderStage(vs.c_str(), GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage(fs.c_str(), GL_FRAGMENT_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/texture_quad/texture_quad.vs").c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/texture_quad/texture_quad.fs").c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
 
-    texture2D.FromPBO(FileSystem::getPath(path).c_str(),false);
+    // load and create a texture 
+    // -------------------------
+    texture2D.FromPBO(FileSystem::getPath("resources/textures/container.jpg").c_str(),false);
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -78,8 +79,4 @@ private:
     Shader ourShader;
     Texture2D texture2D;
     unsigned int VBO, VAO, EBO;
-
-
-    std::string vs, fs ,path;
-
 };

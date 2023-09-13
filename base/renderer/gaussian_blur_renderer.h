@@ -9,8 +9,7 @@ class GuassianBlurRenderer: public Renderer
 {
 public:
 
-GuassianBlurRenderer(const std::string& vs,const std::string& fs):
-vs(vs),fs(fs)
+GuassianBlurRenderer()
 {
     init();
 }
@@ -19,8 +18,8 @@ void init() override
 {
     // build and compile our shader zprogram
     // ------------------------------------
-    ourShader.LoadShaderStage(vs.c_str(), GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage(fs.c_str(), GL_FRAGMENT_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/gaussian_blur/gaussian_blur.vs").c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/gaussian_blur/gaussian_blur.fs").c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
 
     float quadVertices[] = {
@@ -61,8 +60,4 @@ private:
     Shader ourShader;
     Texture2D texture2D;
     unsigned int VBO, VAO, EBO;
-
-
-    std::string vs, fs ,path;
-
 };

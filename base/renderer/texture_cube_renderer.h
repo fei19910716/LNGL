@@ -1,36 +1,20 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#pragma once
 
 
 #include "base/utils.h"
 
-#include <iostream>
+#include "renderer.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
-
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-Shader ourShader;
-Texture2D texture2D_1, texture2D_2;
-unsigned int VBO, VAO, EBO;
-
-
-// callbacks
-void processInput(GLFWwindow *window)
+class TextureCubeRenderer: public Renderer
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+public:
+
+TextureCubeRenderer()
+{
+    init();
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-
-void init(GLFWwindow *window)
+void init() override
 {
     // configure global opengl state
     // -----------------------------
@@ -38,14 +22,13 @@ void init(GLFWwindow *window)
 
     // build and compile our shader zprogram
     // ------------------------------------
-    ourShader.LoadShaderStage("6.2.coordinate_systems.vs", GL_VERTEX_SHADER);
-    ourShader.LoadShaderStage("6.2.coordinate_systems.fs", GL_FRAGMENT_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/texture_cube/texture_cube.vs").c_str(), GL_VERTEX_SHADER);
+    ourShader.LoadShaderStage(FileSystem::getPath("resources/shaders/texture_cube/texture_cube.fs").c_str(), GL_FRAGMENT_SHADER);
     ourShader.Link();
 
     // load and create a texture 
     // -------------------------
-    texture2D_1.FromImage(FileSystem::getPath("resources/textures/container.jpg").c_str(),false);
-    texture2D_2.FromImage(FileSystem::getPath("resources/textures/awesomeface.png").c_str(),false);
+    texture2D.FromImage(FileSystem::getPath("resources/textures/container.jpg").c_str(),false);
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -107,23 +90,22 @@ void init(GLFWwindow *window)
     // texture coord attribute
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-
-    ourShader.use();
-    ourShader.SetUniform<int>("texture1", 0);
-    ourShader.SetUniform<int>("texture2", 1);
 }
 
+template<typename T>
+void SetUniform(const std::string& name, const T& value)
+{
+    ourShader.use();
+    ourShader.SetUniform<T>(name,value);
+}
 
-void render()
+void render() override
 {
     // render
     // ------
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
     // bind textures on corresponding texture units
-    texture2D_1.Bind(GL_TEXTURE0);
-    texture2D_2.Bind(GL_TEXTURE1);
+    texture2D.Bind(GL_TEXTURE0);
 
     // activate shader
     ourShader.use();
@@ -132,9 +114,9 @@ void render()
     glm::mat4 model         = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     glm::mat4 view          = glm::mat4(1.0f);
     glm::mat4 projection    = glm::mat4(1.0f);
-    model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+    model = glm::rotate(model, 45.0f /*(float)glfwGetTime()*/ , glm::vec3(0.5f, 1.0f, 0.0f));
     view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 0.1f, 100.0f);
     ourShader.SetUniform<glm::mat4>("model",model);
     ourShader.SetUniform<glm::mat4>("view",view);
     // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
@@ -145,11 +127,8 @@ void render()
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
-
-
-void clean()
-{
-
-}
-
-ExamleMain("6.2.coordinate_systems_depth", SCR_WIDTH, SCR_HEIGHT)
+private:
+    Shader ourShader;
+    unsigned int VBO, VAO;
+    Texture2D texture2D;
+};
