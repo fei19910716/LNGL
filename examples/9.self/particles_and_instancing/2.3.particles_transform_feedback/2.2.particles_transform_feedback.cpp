@@ -28,7 +28,7 @@
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-BillboardRenderer* renderer;
+ParticleSystem* renderer;
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
@@ -61,7 +61,7 @@ void processInput(GLFWwindow *window)
 
 void init(GLFWwindow *window)
 {
-    renderer = new BillboardRenderer;
+    renderer = new ParticleSystem;
 }
 
 
@@ -83,7 +83,7 @@ void render()
 
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-    renderer->Render(projection*view, cameraPos);
+    renderer->Render((int)deltaTime, projection*view, cameraPos);
 }
 
 

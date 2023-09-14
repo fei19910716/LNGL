@@ -92,26 +92,31 @@ bool ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[i]);
         glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[i]);
         glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), Particles, GL_DYNAMIC_DRAW);
-        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[i]);        
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[i]);
     }
                       
+    particle_shader.LoadShaderStage("tfo.vs",GL_VERTEX_SHADER);
+    particle_shader.LoadShaderStage("tfo.gs",GL_GEOMETRY_SHADER);
+    particle_shader.LoadShaderStage("tfo.fs",GL_FRAGMENT_SHADER);
+    particle_shader.Link();
 
-    
     particle_shader.use();
     
-    // particle_shader.SetRandomTextureUnit(RANDOM_TEXTURE_UNIT_INDEX);
-    // particle_shader.SetLauncherLifetime(100.0f);
-    // particle_shader.SetShellLifetime(10000.0f);
-    // particle_shader.SetSecondaryShellLifetime(2500.0f);
+    particle_shader.SetUniform<int>("gRandomTexture",0);
+    particle_shader.SetUniform<float>("gLauncherLifetime",100.0f);
+    particle_shader.SetUniform<float>("gShellLifetime",10000.0f);
+    particle_shader.SetUniform<float>("gSecondaryShellLifetime",2500.0f);
     
-    
+    billboad_shader.LoadShaderStage("billboad.vs",GL_VERTEX_SHADER);
+    billboad_shader.LoadShaderStage("billboad.gs",GL_GEOMETRY_SHADER);
+    billboad_shader.LoadShaderStage("billboad.fs",GL_FRAGMENT_SHADER);
+    billboad_shader.Link();
     billboad_shader.use();
 
-    // m_billboardTechnique.SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
-
-    // m_billboardTechnique.SetBillboardSize(0.01f);
+    billboad_shader.SetUniform<int>("gColorMap",0);
+    billboad_shader.SetUniform<float>("gBillboardSize",0.01f);
     
-    m_pTexture.FromImage("../Content/fireworks_red.jpg",false);
+    m_pTexture.FromImage(FileSystem::getPath("resources/textures/awesomeface.png").c_str(),false);
     
     return true;
 }
@@ -133,10 +138,10 @@ void ParticleSystem::Render(int DeltaTimeMillis, const glm::mat4& VP, const glm:
 void ParticleSystem::UpdateParticles(int DeltaTimeMillis)
 {
     particle_shader.use();
-    m_updateTechnique.SetTime(m_time);
-    m_updateTechnique.SetDeltaTimeMillis(DeltaTimeMillis);
+    particle_shader.SetUniform<int>("gTime",m_time);
+    particle_shader.SetUniform<int>("gDeltaTimeMillis",DeltaTimeMillis);
    
-    m_randomTexture.Bind(RANDOM_TEXTURE_UNIT);
+    m_randomTexure.Bind(GL_TEXTURE0);
     
     glEnable(GL_RASTERIZER_DISCARD);
     
@@ -148,10 +153,10 @@ void ParticleSystem::UpdateParticles(int DeltaTimeMillis)
     glEnableVertexAttribArray(2);
     glEnableVertexAttribArray(3);
 
-    glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);                          // type
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);         // position
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)16);        // velocity
-    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)28);          // lifetime
+    glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)16);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)28);
     
     glBeginTransformFeedback(GL_POINTS);
 
@@ -176,8 +181,8 @@ void ParticleSystem::UpdateParticles(int DeltaTimeMillis)
 void ParticleSystem::RenderParticles(const glm::mat4& VP, const glm::vec3& CameraPos)
 {
     billboad_shader.use();
-    billboad_shader.SetUniform<glm::vec3>(CameraPos);
-    billboad_shader.SetUniform<glm::mat4>(VP);
+    billboad_shader.SetUniform<glm::vec3>("gCameraPos",CameraPos);
+    billboad_shader.SetUniform<glm::mat4>("gVP",VP);
     
     m_pTexture.Bind(GL_TEXTURE0);
     

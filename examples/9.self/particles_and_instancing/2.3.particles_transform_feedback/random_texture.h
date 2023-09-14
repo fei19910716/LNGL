@@ -32,6 +32,18 @@ RandomTexture::~RandomTexture()
     }
 }
 
+/**
+ * return [0.0f,1.0f]
+*/
+float RandomFloat()
+{
+    /**
+     * rand(): Returns a pseudo-random integer value between ​0​ and RAND_MAX (0 and RAND_MAX included).
+    */
+    float Max = RAND_MAX;
+    return ((float)rand() / Max);
+}
+
 
 bool RandomTexture::InitRandomTexture(unsigned int Size)
 {
@@ -51,7 +63,7 @@ bool RandomTexture::InitRandomTexture(unsigned int Size)
     
     delete [] pRandomData;
     
-    return GLCheckError();
+    return true;
 }
 
     
