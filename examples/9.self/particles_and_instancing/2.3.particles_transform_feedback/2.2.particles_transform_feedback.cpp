@@ -62,6 +62,7 @@ void processInput(GLFWwindow *window)
 void init(GLFWwindow *window)
 {
     renderer = new ParticleSystem;
+    renderer->InitParticleSystem(glm::vec3(0.0f,-0.9f,0.0f));
 }
 
 

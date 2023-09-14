@@ -10,7 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(particles_and_instancing)
-    add_subdirectory(transform_feedback)
+    add_subdirectory(2.3.2.gs_tranfrom_feedback)
 endif()
 

@@ -38,6 +38,7 @@ private:
     bool m_isFirst;
     unsigned int m_currVB;
     unsigned int m_currTFB;
+    GLuint VAO;
     GLuint m_particleBuffer[2];
     GLuint m_transformFeedback[2];
     RandomTexture m_randomTexure;
@@ -85,6 +86,8 @@ bool ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
     Particles[0].Vel = glm::vec3(0.0f, 0.0001f, 0.0f);
     Particles[0].LifetimeMillis = 0.0f;
 
+    glGenVertexArrays(1,&VAO);
+    glBindVertexArray(VAO);
     glGenTransformFeedbacks(2, m_transformFeedback);    
     glGenBuffers(2, m_particleBuffer);
     
@@ -145,6 +148,7 @@ void ParticleSystem::UpdateParticles(int DeltaTimeMillis)
     
     glEnable(GL_RASTERIZER_DISCARD);
     
+    glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currVB]);    
     glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[m_currTFB]);
 
