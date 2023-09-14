@@ -8,7 +8,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "particle_generator.h"
+#include "particles_renderer.h"
 
 
 // settings
