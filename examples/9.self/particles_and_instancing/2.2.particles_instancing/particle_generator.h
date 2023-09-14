@@ -68,23 +68,54 @@ public:
     {
         // use additive blending to give it a 'glow' effect
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-        
-        this->shader.use();
-        for (Particle particle : this->particles)
+
+        ///--KEYCODE--///
+        for (int i = 0; i< this->particles.size(); i++)
         {
+            Particle& particle = particles[i];
+
+            glm::mat4 model = glm::mat4(1.0f);
+
             if (particle.Life > 0.0f)
             {
-                glm::mat4 model = glm::mat4(1.0f);
                 model = glm::translate(model,glm::vec3(particle.Position,0.0f));
                 model = glm::scale(model,glm::vec3(0.03f));
-                this->shader.SetUniform<glm::mat4>("model", model);
-                this->shader.SetUniform<glm::vec4>("color", particle.Color);
-                this->texture.Bind(GL_TEXTURE0);
-                glBindVertexArray(this->VAO);
-                glDrawArrays(GL_TRIANGLES, 0, 6);
-                glBindVertexArray(0);
+            }else{
+                model = glm::scale(model,glm::vec3(0.0f));
             }
+
+            models[i] = model;
         }
+        glBindVertexArray(this->VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+        {
+            /**
+             * http://www.opengl.org/wiki/Buffer_Object_Streaming
+             * Buffer orphaning, a common way to improve streaming perf. See above link for details.
+            */
+            glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * TOTAL, NULL, GL_STREAM_DRAW);
+        }
+        glBufferSubData(GL_ARRAY_BUFFER,0,sizeof(glm::mat4) * TOTAL, models);
+
+        glEnableVertexAttribArray(2); 
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)0);
+        glEnableVertexAttribArray(3); 
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(1 * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(4); 
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(2 * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(5); 
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(3 * sizeof(glm::vec4)));
+
+        glVertexAttribDivisor(2, 1);
+        glVertexAttribDivisor(3, 1);
+        glVertexAttribDivisor(4, 1);
+        glVertexAttribDivisor(5, 1);
+        ///--KEYCODE--///
+
+        this->shader.use();
+        this->texture.Bind(GL_TEXTURE0);
+        glDrawArraysInstanced(GL_TRIANGLES, 0, 6, TOTAL);
+
         // don't forget to reset to default blending mode
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
@@ -120,6 +151,15 @@ public:
         // set mesh attributes
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+
+
+        ///--KEYCODE--///
+        unsigned int instanceVBO;
+        glGenBuffers(1, &instanceVBO);
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * TOTAL, models, GL_STATIC_DRAW);
+        ///--KEYCODE--///
+
         glBindVertexArray(0);
 
         // create this->amount default particle instances
@@ -153,12 +193,13 @@ public:
 private:
     // state
     std::vector<Particle> particles;
+    glm::mat4 models[TOTAL];
     unsigned int lastAliveParticle = 0;
 
     // render state
     Shader shader;
     Texture2D texture;
-    unsigned int VAO;
+    unsigned int VAO, instanceVBO;
 };
 
 // stores the index of the last particle used (for quick access to next dead particle)
