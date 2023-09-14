@@ -13,5 +13,6 @@ else()
     add_subdirectory(1.1.instancing_uniform)
     add_subdirectory(1.2.instancing_instanced_arrays)
     add_subdirectory(1.3.instancing_instanced_arrays_mat4)
+    add_subdirectory(2.1.particles_instancing)
 endif()
 
