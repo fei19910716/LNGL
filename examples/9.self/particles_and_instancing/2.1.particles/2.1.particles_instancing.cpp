@@ -14,9 +14,10 @@
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
 ParticleGenerator* particleGenerator;
-Shader shader;
-Texture2D texture2D;
+float deltaTime = 0.0f;	// time between current frame and last frame
+float lastFrame = 0.0f;
 
 // callbacks
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -34,28 +35,21 @@ void processInput(GLFWwindow *window)
 
 void init(GLFWwindow* window)
 {
-    shader.LoadShaderStage("particle.vs",GL_VERTEX_SHADER);
-    shader.LoadShaderStage("particle.fs",GL_FRAGMENT_SHADER);
-    shader.Link();
-
-    texture2D.FromImage(FileSystem::getPath("resources/textures/particle.png").c_str(),false);
-    
-    particleGenerator = new ParticleGenerator(shader, texture2D, 500);
+    particleGenerator = new ParticleGenerator;
 }
 
-double lastTime = glfwGetTime();
+
 void render()
 {
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     
-    double currentTime = glfwGetTime();
-    double delta = currentTime - lastTime;
-    lastTime = currentTime;
+    float currentFrame = static_cast<float>(glfwGetTime());
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 
-    GameObject go{glm::vec2(1.0f,5.0f),glm::vec2(1.0f)};
-    particleGenerator->Update(delta, go, 2, glm::vec2(25.0f));
+    particleGenerator->Update(deltaTime, glm::vec2(0.0f,-0.9f));
 
 
     particleGenerator->Draw();
