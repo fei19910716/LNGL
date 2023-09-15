@@ -72,12 +72,16 @@ void init(GLFWwindow* window)
 
 
     GLuint tbo;
-    glGenBuffers(1, &tbo);
-    glBindBuffer(GL_ARRAY_BUFFER, tbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(data) * 3, nullptr, GL_STATIC_READ);
+    glGenTransformFeedbacks(1, &tbo);
+    glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, tbo);
 
+    GLuint tboBuffer;
+    glGenBuffers(1, &tboBuffer);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, tboBuffer);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, sizeof(data) * 3, nullptr, GL_STATIC_READ);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tboBuffer);
+    
     glEnable(GL_RASTERIZER_DISCARD);
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
 
     glBeginTransformFeedback(GL_TRIANGLES);
     glDrawArrays(GL_POINTS, 0, 5);

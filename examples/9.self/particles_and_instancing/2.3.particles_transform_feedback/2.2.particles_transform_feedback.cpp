@@ -61,8 +61,7 @@ void processInput(GLFWwindow *window)
 
 void init(GLFWwindow *window)
 {
-    renderer = new ParticleSystem;
-    renderer->InitParticleSystem(glm::vec3(0.0f,-0.9f,0.0f));
+    renderer = new ParticleSystem(glm::vec3(0.0f,-0.9f,0.0f));
 }
 
 
@@ -84,7 +83,8 @@ void render()
 
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-    renderer->Render((int)deltaTime, projection*view, cameraPos);
+    renderer->Update(deltaTime);
+    renderer->Render(projection*view, cameraPos);
 }
 
 

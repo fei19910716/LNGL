@@ -15,7 +15,10 @@
 class Shader
 {
 public:
-    Shader() = default;
+    Shader()
+    {
+        ID = glCreateProgram();
+    }
     ~Shader()
     {
         glDeleteProgram(ID);
@@ -56,20 +59,14 @@ public:
         glCompileShader(vertex);
         checkCompileErrors(vertex);
 
+        glAttachShader(ID, vertex);
+
         shaders.push_back(vertex);
     }
 
 
     void Link()
     {
-        // shader Program
-        ID = glCreateProgram();
-
-        for(auto shader: shaders)
-        {
-            glAttachShader(ID, shader);
-        }
-        
         glLinkProgram(ID);
         checkLinkErrors(ID);
 
@@ -117,9 +114,10 @@ public:
 			glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 
 		}
 	}
-
-private:
+    
     unsigned int ID;
+private:
+    
     std::vector<unsigned int> shaders;
     
     // utility function for checking shader compilation/linking errors.

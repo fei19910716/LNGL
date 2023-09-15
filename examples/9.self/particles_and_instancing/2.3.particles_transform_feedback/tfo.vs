@@ -1,19 +1,20 @@
-#version 330 core                                                                        
-                                                                                    
-layout (location = 0) in float Type;                                                
-layout (location = 1) in vec3 Position;                                             
-layout (location = 2) in vec3 Velocity;                                             
-layout (location = 3) in float Age;                                                 
-                                                                                    
-out float Type0;                                                                    
-out vec3 Position0;                                                                 
-out vec3 Velocity0;                                                                 
-out float Age0;                                                                     
-                                                                                    
-void main()                                                                         
-{                                                                                   
-    Type0 = Type;                                                                   
-    Position0 = Position;                                                           
-    Velocity0 = Velocity;                                                           
-    Age0 = Age;                                                                     
+#version 330 core
+
+layout (location = 0) in vec4   PV;
+layout (location = 1) in vec4   Color;
+layout (location = 2) in float  Life;
+
+out VS_OUT {
+    vec2   Position;
+    vec2   Velocity;
+    vec4   Color;
+    float  Life;
+} vs_out;
+
+void main()
+{
+   vs_out.Position = PV.xy;
+   vs_out.Velocity = PV.zw;
+   vs_out.Color    = Color;
+   vs_out.Life     = Life;
 }
