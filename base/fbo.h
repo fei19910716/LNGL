@@ -92,8 +92,5 @@ using fbo_resource = fg::resource<FrameBuffer::Description, FrameBuffer>;
 namespace fg
 {
 template<>
-std::unique_ptr<FrameBuffer> realize(const FrameBuffer::Description& description)
-{
-  return std::make_unique<FrameBuffer>(description);
-}
+std::unique_ptr<FrameBuffer> realize(const FrameBuffer::Description& description);
 }

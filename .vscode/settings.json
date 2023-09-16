@@ -81,6 +81,7 @@
         "queue": "cpp",
         "condition_variable": "cpp",
         "xthread": "cpp",
-        "xxatomic": "cpp"
+        "xxatomic": "cpp",
+        "stop_token": "cpp"
     }
 }

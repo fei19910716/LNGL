@@ -4,6 +4,7 @@
 #include "texture.h"
 #include "fbo.h"
 #include "timer.h"
+#include "filesystem.h"
 
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \

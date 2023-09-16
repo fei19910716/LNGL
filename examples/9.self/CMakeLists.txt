@@ -11,6 +11,5 @@ if(BUILD_ALL_SAMPLES)
     endforeach()
 else()
     add_subdirectory(particles_and_instancing)
-    add_subdirectory(transform_feedback)
 endif()
 

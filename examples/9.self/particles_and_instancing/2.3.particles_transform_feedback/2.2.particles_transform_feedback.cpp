@@ -20,7 +20,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "particles_renderer.h"
+#include <base/utils.h>
+#include "particle_system_tf.h"
 
 #include <iostream>
 
@@ -28,7 +29,7 @@
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-ParticleSystem* renderer;
+CParticleSystemTransformFeedback psMainParticleSystem;
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
@@ -61,7 +62,18 @@ void processInput(GLFWwindow *window)
 
 void init(GLFWwindow *window)
 {
-    renderer = new ParticleSystem(glm::vec3(0.0f,-0.9f,0.0f));
+    psMainParticleSystem.InitalizeParticleSystem();
+    psMainParticleSystem.SetGeneratorProperties(
+		glm::vec3(0.0f, -0.9f, 0.0f), // Where the particles are generated
+		glm::vec3(-0.3f, 0.0f, 0.0f), // Minimal velocity
+		glm::vec3(0.3f, 2.0f, 0.0f), // Maximal velocity
+		glm::vec3(0.0f,-1.0f, 0.0f), // Gravity force applied to particles
+		glm::vec3(0.0f, 0.5f, 1.0f), // Color (light blue)
+		1.5f, // Minimum lifetime in seconds
+		5.0f, // Maximum lifetime in seconds
+		0.03f, // Rendered size
+		0.5f, // Spawn every 0.05 seconds
+		100); // And spawn 30 particles
 }
 
 
@@ -83,14 +95,16 @@ void render()
 
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-    renderer->Update(deltaTime);
-    renderer->Render(projection*view, cameraPos);
+    psMainParticleSystem.SetMatrices(&projection, cameraPos, cameraPos + cameraFront, cameraUp);
+
+	psMainParticleSystem.UpdateParticles(deltaTime);
+	psMainParticleSystem.RenderParticles();
 }
 
 
 void clean()
 {
-    delete renderer;
+
 }
 
 
