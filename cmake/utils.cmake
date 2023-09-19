@@ -64,6 +64,7 @@ target_link_libraries(${target} PUBLIC base)
 file(GLOB shader_files
 ${dir}/*.vs
 ${dir}/*.fs
+${dir}/*.cs
 ${dir}/*.gs)
 
 

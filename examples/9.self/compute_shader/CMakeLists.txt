@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(compute_shader)
+    add_subdirectory(compute_image1d)
 endif()
 
