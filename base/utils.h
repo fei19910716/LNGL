@@ -5,6 +5,7 @@
 #include "fbo.h"
 #include "timer.h"
 #include "filesystem.h"
+#include "stb/stb_image.h"
 
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \

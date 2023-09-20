@@ -13,6 +13,10 @@ public:
 
     void Bind(GLenum textureUnit);
 
+    unsigned int ID() const
+    {
+        return texture;
+    }
 private:
     unsigned int texture;
 };
