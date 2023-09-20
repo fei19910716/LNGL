@@ -1,1 +1,0 @@
-See particles_and_instancing/2.4.particles_compute_shader for details.

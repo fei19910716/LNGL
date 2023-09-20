@@ -194,7 +194,6 @@ void Texture2D::FromPBO(const char* path, bool flip)
         stbi_image_free(data);
     }
 
-
     void Texture2D::Bind(GLenum textureUnit)
     {
         glActiveTexture(textureUnit);
