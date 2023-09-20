@@ -13,5 +13,6 @@ else()
     add_subdirectory(compute_image1d)
     add_subdirectory(compute_image2d)
     add_subdirectory(compute_ssbo)
+    add_subdirectory(compute_gaussian_blur)
 endif()
 
