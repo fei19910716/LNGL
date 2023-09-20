@@ -11,5 +11,6 @@ if(BUILD_ALL_SAMPLES)
     endforeach()
 else()
     add_subdirectory(compute_image1d)
+    add_subdirectory(compute_image2d)
 endif()
 
