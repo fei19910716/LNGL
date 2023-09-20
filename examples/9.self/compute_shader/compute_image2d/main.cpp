@@ -97,7 +97,7 @@ void init(GLFWwindow* window)
 	screenShader->Link();
 
 	computeShader = new Shader;
-	computeShader->LoadShaderStage("compute.cs",GL_COMPUTE_SHADER);
+	computeShader->LoadShaderStage("compute_image2d.cs",GL_COMPUTE_SHADER);
 	computeShader->Link();
 
 	screenShader->use();
@@ -126,7 +126,7 @@ void render()
 {
 
 	// Set frame time
-	float currentFrame = glfwGetTime();
+	float currentFrame = (float)glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 

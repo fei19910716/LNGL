@@ -113,7 +113,7 @@ void DoCompute()
 
     for (int i = 0; i < kArraySize; i++)
     {
-        inputData[i] = i;
+        inputData[i] = (float)i;
     }
 
     glBindTexture(GL_TEXTURE_1D, inputTexId);
