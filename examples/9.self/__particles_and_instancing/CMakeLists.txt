@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(2.3.particles_transform_feedback)
+    add_subdirectory(2.4.particles_compute_shader)
 endif()
 
