@@ -45,6 +45,11 @@ enum PropertyChangeType
     PROPERTY_OVER_TIME
 };
 
+
+/**
+ * reference: https://github.com/diharaw/gpu-particle-system
+*/
+
 class GPUParticleSystem : public dw::Application
 {
 protected:
@@ -90,18 +95,12 @@ protected:
 
     void update(double delta) override
     {
-        // ImGuizmo::BeginFrame();
-
         m_accumulator += float(m_delta_seconds);
 
         std::uniform_real_distribution<> distribution(1.0f, 10000.0f);
 
         m_seeds                = glm::vec3(distribution(m_generator), distribution(m_generator), distribution(m_generator));
         m_max_active_particles = (int32_t)(m_max_lifetime * m_emission_rate);
-
-        // ImGuizmo::SetRect(0, 0, m_width, m_height);
-
-        // ImGuizmo::Manipulate(&m_main_camera->m_view[0][0], &m_main_camera->m_projection[0][0], ImGuizmo::TRANSLATE, ImGuizmo::WORLD, &m_position_transform[0][0], NULL, NULL);
 
         m_position = m_position_transform * glm::vec4(1.0f);
         m_position -= glm::vec3(1.0f);
@@ -115,16 +114,10 @@ protected:
         particle_emission();
         particle_simulation();
 
-        // m_sky_model.update_cubemap();
         render_shadow_map();
         render_lit_scene();
 
-        // m_sky_model.render_skybox(0, 0, m_width, m_height, m_main_camera->m_view, m_main_camera->m_projection, nullptr);
-
-        // if (m_show_grid)
-        //     m_debug_draw.grid(m_main_camera->m_view_projection, 1.0f, 10.0f);
-
-        // m_debug_draw.render(nullptr, m_width, m_height, m_main_camera->m_view_projection, m_main_camera->m_position);
+        // render_skybox();
 
         m_pre_sim_idx  = m_pre_sim_idx == 0 ? 1 : 0;
         m_post_sim_idx = m_post_sim_idx == 0 ? 1 : 0;
@@ -135,7 +128,6 @@ protected:
     void shutdown() override
     {
         m_shadow_map.shutdown();
-        // m_sky_model.shutdown();
     }
 
     // -----------------------------------------------------------------------------------------------------------------------------------
@@ -250,8 +242,8 @@ private:
         m_alive_indices_ssbo[m_post_sim_idx]->bind_base(1);
 
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_draw_indirect_args_ssbo->handle());
-
-        glDrawArraysIndirect(GL_TRIANGLES, 0);
+        glPointSize(2.0f);
+        glDrawArraysIndirect(GL_POINTS, 0);
     }
 
     // -----------------------------------------------------------------------------------------------------------------------------------
@@ -268,7 +260,7 @@ private:
             dw::SubMesh& submesh = mesh->sub_meshes()[i];
 
             program->set_uniform("u_Color", glm::vec3(0.7f));
-            program->set_uniform("u_Direction", /*m_sky_model.direction()*/ glm::vec3(-1.0f));
+            program->set_uniform("u_Direction", glm::vec3(0.0f, -1.0f ,0.0f));
             program->set_uniform("u_LightColor", m_shadow_map.color());
 
             // Issue draw call.
@@ -875,12 +867,6 @@ private:
     glm::vec3          m_seeds = glm::vec4(0.0f);
     std::random_device m_random;
     std::mt19937       m_generator;
-
-    // UI
-    // ImGradient      m_color_gradient;
-    // float           m_size_curve[5] = { 0.000f, 0.000f, 1.000f, 1.000f, 0.0f };
-    // ImGradientMark* m_dragging_mark = nullptr;
-    // ImGradientMark* m_selected_mark = nullptr;
 };
 
 DW_DECLARE_MAIN(GPUParticleSystem)

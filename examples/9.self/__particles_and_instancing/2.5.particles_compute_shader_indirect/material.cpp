@@ -1,4 +1,4 @@
-#include "include/logger.h"
+
 #include "include/macros.h"
 #include "include/material.h"
 #include "include/utility.h"

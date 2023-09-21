@@ -98,6 +98,7 @@ static void APIENTRY glDebugCallback(GLenum source, GLenum type, GLuint id, GLen
 	printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
 }
 
+
 int main(void)
 {
 	//Set the error callback

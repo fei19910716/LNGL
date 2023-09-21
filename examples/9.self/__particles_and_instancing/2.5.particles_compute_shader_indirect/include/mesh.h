@@ -6,7 +6,6 @@
 #include <unordered_map>
 #include <memory>
 #include "ogl.h"
-#include "vk.h"
 
 namespace dw
 {

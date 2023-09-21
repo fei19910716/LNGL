@@ -13,6 +13,11 @@ to move the particles towards the target position
 
 #include "base/utils.h"
 
+
+/**
+ * reference: https://github.com/SaschaWillems/openglcpp/tree/master/computeShader
+*/
+
 class glRenderer
 {
 private:

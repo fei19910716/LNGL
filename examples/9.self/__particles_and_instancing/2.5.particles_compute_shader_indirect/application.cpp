@@ -1,6 +1,5 @@
 #include "include/application.h"
 
-#include "include/profiler.h"
 #include <iostream>
 
 #if defined(__EMSCRIPTEN__)
@@ -339,19 +338,6 @@ bool Application::init_base(int argc, const char* argv[])
     m_width  = display_w;
     m_height = display_h;
 
-//     if (!m_debug_draw.init(
-// #if defined(DWSF_VULKAN)
-//             m_vk_backend, m_vk_backend->swapchain_render_pass()
-// #endif
-//                 ))
-        // return false;
-
-    profiler::initialize(
-#if defined(DWSF_VULKAN)
-        m_vk_backend
-#endif
-    );
-
     if (!init(argc, argv))
         return false;
 
@@ -479,16 +465,12 @@ void Application::begin_frame()
 
     m_last_mouse_x = m_mouse_x;
     m_last_mouse_y = m_mouse_y;
-
-    profiler::begin_frame();
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------
 
 void Application::end_frame()
 {
-    profiler::end_frame();
-
 #if !defined(DWSF_VULKAN)
 #    if defined(DWSF_IMGUI)
     ImGui::Render();

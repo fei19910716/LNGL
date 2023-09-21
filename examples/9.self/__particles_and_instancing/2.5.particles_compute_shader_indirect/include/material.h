@@ -4,7 +4,6 @@
 #include <string>
 #include <glm/glm.hpp>
 #include "ogl.h"
-#include "vk.h"
 #include <memory>
 
 namespace dw
