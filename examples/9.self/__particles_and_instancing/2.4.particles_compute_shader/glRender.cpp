@@ -25,24 +25,6 @@ struct vertex4f {
 	GLfloat x, y, z, w;
 };
 
-
-string readFile(const char *fileName) 
-{
-	string fileContent;
-	ifstream fileStream(fileName, ios::in);
-	if (!fileStream.is_open()) {
-		printf("File %s not found\n", fileName);
-		return "";
-	}
-	string line = "";
-	while (!fileStream.eof()) {
-		getline(fileStream, line);
-		fileContent.append(line + "\n");
-	}
-	fileStream.close();
-	return fileContent;
-}
-
 GLuint loadBMPTexture(const char * fileName) 
 {
 	FILE * bmpFile = fopen(fileName, "rb");
@@ -88,119 +70,23 @@ float random(float fMin, float fMax)
 
 glRenderer::glRenderer()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	color[0] = random(64, 255);
 	color[1] = random(64, 255);
 	color[2] = random(64, 255);
 	colorChangeTimer = 1000.0f;
 }
 
-
-glRenderer::~glRenderer()
-{
-}
-
-void glRenderer::printProgramLog(GLuint program)
-{
-	GLint result = GL_FALSE;
-	int logLength;
-
-	glGetProgramiv(program, GL_LINK_STATUS, &result);
-	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
-	if (logLength > 0) {
-		GLchar* strInfoLog = new GLchar[logLength + 1];
-		glGetProgramInfoLog(program, logLength, NULL, strInfoLog);
-		printf("programlog: %s\n", strInfoLog);
-	};
-}
-
-void glRenderer::printShaderLog(GLuint shader)
-{
-	GLint result = GL_FALSE;
-	int logLength;
-
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
-	if (logLength > 0) {
-		GLchar* strInfoLog = new GLchar[logLength + 1];
-		glGetShaderInfoLog(shader, logLength, NULL, strInfoLog);
-		printf("shaderlog: %s\n", strInfoLog);
-	};
-}
-
-
-GLuint glRenderer::loadShader(const char* vertexShaderFile, const char* fragmentShaderFile)
-{
-	GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Read shaders
-	std::string vertShaderStr = readFile(vertexShaderFile);
-	std::string fragShaderStr = readFile(fragmentShaderFile);
-	const char *vertShaderSrc = vertShaderStr.c_str();
-	const char *fragShaderSrc = fragShaderStr.c_str();
-
-	GLint result = GL_FALSE;
-	int logLength;
-
-	// Compile vertex shader
-	std::cout << "Compiling vertex shader." << std::endl;
-	glShaderSource(vertShader, 1, &vertShaderSrc, NULL);
-	glCompileShader(vertShader);
-	printShaderLog(vertShader);
-
-	// Compile fragment shader
-	std::cout << "Compiling fragment shader." << std::endl;
-	glShaderSource(fragShader, 1, &fragShaderSrc, NULL);
-	glCompileShader(fragShader);
-	printShaderLog(fragShader);
-
-	std::cout << "Linking program" << std::endl;
-	GLuint program = glCreateProgram();
-	glAttachShader(program, vertShader);
-	glAttachShader(program, fragShader);
-	glLinkProgram(program);
-	printProgramLog(program);
-
-	glDeleteShader(vertShader);
-	glDeleteShader(fragShader);
-
-	return program;
-}
-
-GLuint glRenderer::loadComputeShader(const char* computeShaderFile) 
-{
-	GLuint computeShader = glCreateShader(GL_COMPUTE_SHADER);
-
-	// Read shaders
-	std::string computeShaderStr = readFile(computeShaderFile);
-	const char *computeShaderSrc = computeShaderStr.c_str();
-
-	GLint result = GL_FALSE;
-	int logLength;
-
-	std::cout << "Compiling compute shader." << std::endl;
-	glShaderSource(computeShader, 1, &computeShaderSrc, NULL);
-	glCompileShader(computeShader);
-
-	printShaderLog(computeShader);
-
-	std::cout << "Linking program" << std::endl;
-	GLuint program = glCreateProgram();
-	glAttachShader(program, computeShader);
-	glLinkProgram(program);
-	printProgramLog(program);
-	
-	glDeleteShader(computeShader);
-
-	return program;
-
-}
-
 void glRenderer::generateShaders()
 {
-	baseshader = loadShader("vertex.vs", "fragment.fs");
-	computeshader = loadComputeShader("compute.cs");
+	baseshader = new Shader;
+	baseshader->LoadShaderStage("vertex.vs",GL_VERTEX_SHADER);
+	baseshader->LoadShaderStage("fragment.fs",GL_FRAGMENT_SHADER);
+	baseshader->Link();
+
+	computeshader = new Shader;
+	computeshader->LoadShaderStage("compute.cs",GL_COMPUTE_SHADER);
+	computeshader->Link();
 }
 
 void glRenderer::resetPositionSSBO()
@@ -354,11 +240,11 @@ void glRenderer::renderScene()
 	float destPosX = (float)(cursorX / (windowWidth) - 0.5f) * 2.0f;
 	float destPosY = (float)((windowHeight - cursorY) / windowHeight - 0.5f) * 2.0f;
 
-	glUseProgram(computeshader);
-	glUniform1f(glGetUniformLocation(computeshader, "deltaT"), frameDelta * speedMultiplier * (pause ? 0.0f : 1.0f));
-	glUniform3f(glGetUniformLocation(computeshader, "destPos"), destPosX, destPosY, 0);
-	glUniform2f(glGetUniformLocation(computeshader, "vpDim"), 1, 1);
-	glUniform1i(glGetUniformLocation(computeshader, "borderClamp"), (int)borderEnabled);
+	computeshader->use();
+	computeshader->SetUniform("deltaT", frameDelta * speedMultiplier * (pause ? 0.0f : 1.0f));
+	computeshader->SetUniform("destPos",glm::vec3(destPosX, destPosY, 0));
+	computeshader->SetUniform("vpDim", glm::vec2(1, 1));
+	computeshader->SetUniform("borderClamp", (int)borderEnabled);
 
 	int workingGroups = particleCount / 16;
 
@@ -371,15 +257,15 @@ void glRenderer::renderScene()
 
 	// Render scene
 
-	glUseProgram(baseshader);
+	baseshader->use();
 
-	glUniform4f(glGetUniformLocation(baseshader, "inColor"), color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f, 1.0f);
+	baseshader->SetUniform("inColor",glm::vec4(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f, 1.0f));
 
 	glGetError();
 
 	glBindTexture(GL_TEXTURE_2D, particleTex);
 
-	GLuint posAttrib = glGetAttribLocation(baseshader, "pos");
+	GLuint posAttrib = glGetAttribLocation(baseshader->ID, "pos");
 
 	glBindBuffer(GL_ARRAY_BUFFER, SSBOPos);
 	glVertexAttribPointer(posAttrib, 4, GL_FLOAT, GL_FALSE, 0, 0);

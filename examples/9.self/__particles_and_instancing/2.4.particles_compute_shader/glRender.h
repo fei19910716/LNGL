@@ -11,13 +11,14 @@ to move the particles towards the target position
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "base/utils.h"
+
 class glRenderer
 {
 private:
-	GLuint baseshader;
-	GLuint computeshader;
-	GLuint SSBOPos;
-	GLuint SSBOVel;
+	Shader *baseshader, *computeshader;
+	GLuint SSBOPos, SSBOVel;
+
 	GLuint particleTex;
 	float frameDelta = 0.0f;
 	float speedMultiplier = 0.15f;
@@ -28,17 +29,16 @@ private:
 	float colVec[3];
 	float colorChangeTimer;
 	float colorChangeLength;
+
+
 	void resetPositionSSBO();
 	void resetVelocitySSBO();
-	GLuint loadShader(const char* vertexShaderFile, const char* fragmentShaderFile);
-	GLuint loadComputeShader(const char* computeShaderFile);
-	void printProgramLog(GLuint shader);
-	void printShaderLog(GLuint program);
 public:
 	GLFWwindow* window;
 	int particleCount = 1024 * 2;
+
 	glRenderer();
-	~glRenderer();
+	~glRenderer() = default;
 	void generateShaders();
 	void generateBuffers();
 	void resetBuffers();
