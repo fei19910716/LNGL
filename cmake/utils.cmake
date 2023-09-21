@@ -61,7 +61,7 @@ add_executable(${target} ${src_files})
 
 target_link_libraries(${target} PUBLIC base)
 
-file(GLOB shader_files
+file(GLOB_RECURSE shader_files
 ${dir}/*.vs
 ${dir}/*.fs
 ${dir}/*.cs
