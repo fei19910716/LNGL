@@ -19,3 +19,9 @@ Anti-aliased alpha test is one of the most basic use cases for Alpha to Coverage
 Alpha to Coverage maps the alpha output from a pixel shader to the coverage mask of MSAA
 
 Alpha to Coverage let’s the pixel shader’s output alpha change the fraction of coverage samples rendered to.
+
+
+个人理解：
+  MSAA开启后pixel最后的颜色是所有samples平均之后的结果；
+  A2C开启时，会将fragment shader执行后该pixel的alpha转换为coverage mask（具体转换成多少implementation决定）；
+  coverage mask 是bit filed，用于确定哪些sample会被用于计算最终的pixel color.
