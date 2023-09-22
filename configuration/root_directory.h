@@ -1,1 +1,1 @@
-const char * logl_root = "D:/WorkSpace/MyGithub/LearnOpenGL";
+const char * logl_root = "C:/Workspace/myGithub/LearnOpenGL";

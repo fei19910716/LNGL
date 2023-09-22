@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(per-sample_processing)
+    add_subdirectory(transparent_rendering)
 endif()
 

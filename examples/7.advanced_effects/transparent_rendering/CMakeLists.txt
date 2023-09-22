@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(7.advanced_effects)
+    add_subdirectory(opaque_sort)
 endif()
 
