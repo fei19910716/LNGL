@@ -15,10 +15,7 @@
 class Shader
 {
 public:
-    Shader()
-    {
-        ID = glCreateProgram();
-    }
+    Shader() = default;
     ~Shader()
     {
         glDeleteProgram(ID);
@@ -59,6 +56,10 @@ public:
         glCompileShader(vertex);
         checkCompileErrors(vertex);
 
+        if(ID == GL_INVALID_VALUE)
+        {
+            ID = glCreateProgram();
+        }
         glAttachShader(ID, vertex);
 
         shaders.push_back(vertex);
@@ -115,7 +116,7 @@ public:
 		}
 	}
     
-    unsigned int ID;
+    unsigned int ID = GL_INVALID_VALUE;
 private:
     
     std::vector<unsigned int> shaders;
