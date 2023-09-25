@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(opaque_prez)
+    add_subdirectory(transparent_sort)
 endif()
 
