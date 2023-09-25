@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(transparent_rendering)
+    add_subdirectory(2.transparent_rendering)
 endif()
 

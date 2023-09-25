@@ -6,6 +6,7 @@
 #include "timer.h"
 #include "filesystem.h"
 #include "stb/stb_image.h"
+#include "camera.h"
 
 #define ExamleMain(name,width,height)                                               \
 int main()                                                                          \
