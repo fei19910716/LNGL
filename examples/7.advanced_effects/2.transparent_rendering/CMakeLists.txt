@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(transparent_sort)
+    add_subdirectory(oit_alpha_to_coverage)
 endif()
 
