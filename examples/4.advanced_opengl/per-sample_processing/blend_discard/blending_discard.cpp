@@ -7,7 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "base/filesystem.h"
-#include "base/shader_m.h"
+#include "base/shader.h"
 #include "base/camera.h"
 #include "base/model.h"
 

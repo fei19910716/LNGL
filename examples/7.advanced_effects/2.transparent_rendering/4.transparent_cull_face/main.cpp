@@ -125,12 +125,13 @@ void render()
     ourShader.SetUniform<glm::mat4>("view",view);
     ourShader.SetUniform<glm::mat4>("projection", projection);
 
-    // render box
     glBindVertexArray(VAO);
 
+    /**
+     * Render Front first, then back, can solve the 3D object self-transparent issue.
+    */
     glCullFace(GL_FRONT);
     glDrawArrays(GL_TRIANGLES, 0, 36);
-
 
     glCullFace(GL_BACK);
     glDrawArrays(GL_TRIANGLES, 0, 36);

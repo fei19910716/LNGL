@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(pre-z)
+    add_subdirectory(blend_discard)
 endif()
 

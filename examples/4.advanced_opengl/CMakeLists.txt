@@ -10,6 +10,6 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(11.2.anti_aliasing_offscreen)    
+    add_subdirectory(per-sample_processing)    
 endif()
 

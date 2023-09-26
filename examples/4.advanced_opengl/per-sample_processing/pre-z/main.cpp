@@ -16,5 +16,13 @@
 
 int main()
 {
-
+    /**
+     * glBindFrameBuffer(GL_FRAMEBUFFER, 0);
+     * glEnable(GL_DEPTH_TEST);
+     * Render();
+     * 
+     * glBindFrameBuffer(GL_FRAMEBUFFER, 0);
+     * glDepthFunc(GL_EQUAL);
+     * Render();
+    */
 }
