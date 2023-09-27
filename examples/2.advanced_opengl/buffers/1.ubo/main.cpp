@@ -74,10 +74,10 @@ int main()
 
     // build and compile shaders
     // -------------------------
-    Shader shaderRed("8.advanced_glsl.vs", "8.red.fs");
-    Shader shaderGreen("8.advanced_glsl.vs", "8.green.fs");
-    Shader shaderBlue("8.advanced_glsl.vs", "8.blue.fs");
-    Shader shaderYellow("8.advanced_glsl.vs", "8.yellow.fs");
+    Shader shaderRed   ("ubo.vs", "ubo_red.fs");
+    Shader shaderGreen ("ubo.vs", "ubo_green.fs");
+    Shader shaderBlue  ("ubo.vs", "ubo_blue.fs");
+    Shader shaderYellow("ubo.vs", "ubo_yellow.fs");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -135,18 +135,24 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    // configure a uniform buffer object
-    // ---------------------------------
+#pragma region
+    
+    /**
+     * 使用UBO可以实现多个shader共享同一个buffer数据，只需更新一次，则可以update所有的shader.
+    */
+
     // first. We get the relevant block indices
     unsigned int uniformBlockIndexRed = glGetUniformBlockIndex(shaderRed.ID, "Matrices");
     unsigned int uniformBlockIndexGreen = glGetUniformBlockIndex(shaderGreen.ID, "Matrices");
     unsigned int uniformBlockIndexBlue = glGetUniformBlockIndex(shaderBlue.ID, "Matrices");
     unsigned int uniformBlockIndexYellow = glGetUniformBlockIndex(shaderYellow.ID, "Matrices");
+
     // then we link each shader's uniform block to this uniform binding point
     glUniformBlockBinding(shaderRed.ID, uniformBlockIndexRed, 0);
     glUniformBlockBinding(shaderGreen.ID, uniformBlockIndexGreen, 0);
     glUniformBlockBinding(shaderBlue.ID, uniformBlockIndexBlue, 0);
     glUniformBlockBinding(shaderYellow.ID, uniformBlockIndexYellow, 0);
+
     // Now actually create the buffer
     unsigned int uboMatrices;
     glGenBuffers(1, &uboMatrices);
@@ -161,7 +167,10 @@ int main()
     glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
-  
+    
+  #pragma endregion
+    
+    
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -181,11 +190,13 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+#pragma region 
         // set the view and projection matrix in the uniform block - we only have to do this once per loop iteration.
         glm::mat4 view = camera.GetViewMatrix();
         glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
         glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
+#pragma endregion
 
         // draw 4 cubes 
         // RED
