@@ -10,6 +10,7 @@ if(BUILD_ALL_SAMPLES)
         endif()
     endforeach()
 else()
-    add_subdirectory(oit_alpha_to_coverage)
+    add_subdirectory(oit_depth_peeling)
+    add_subdirectory(oit_weighted_blended)
 endif()
 
