@@ -19,6 +19,11 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
 "}\n\0";
 
+
+/**
+ * https://medium.com/@ktstephano/advanced-modern-opengl-direct-state-access-dsa-57a8c46fef23
+*/
+
 int main()
 {
     const unsigned int SCR_WIDTH = 800;
