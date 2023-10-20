@@ -4,6 +4,21 @@
 #define EGL_NATIVE_BUFFER_ANDROID         0x3140
 #endif /* EGL_ANDROID_image_native_buffer */
 
+#ifndef EGL_ANDROID_get_native_client_buffer
+#define EGL_ANDROID_get_native_client_buffer 1
+struct AHardwareBuffer;
+EGLAPI EGLClientBuffer EGLAPIENTRY eglGetNativeClientBufferANDROID (const struct AHardwareBuffer *buffer);
+#endif /* EGL_ANDROID_get_native_client_buffer */
+
+#ifndef EGL_ANDROID_create_native_client_buffer
+#define EGL_ANDROID_create_native_client_buffer 1
+#define EGL_NATIVE_BUFFER_USAGE_ANDROID   0x3143                    // The usage bits of the buffer data
+#define EGL_NATIVE_BUFFER_USAGE_PROTECTED_BIT_ANDROID 0x00000001
+#define EGL_NATIVE_BUFFER_USAGE_RENDERBUFFER_BIT_ANDROID 0x00000002 // The buffer will be used to create a renderbuffer
+#define EGL_NATIVE_BUFFER_USAGE_TEXTURE_BIT_ANDROID 0x00000004      // The buffer will be used to create a texture.
+EGLAPI EGLClientBuffer EGLAPIENTRY eglCreateNativeClientBufferANDROID (const EGLint *attrib_list);
+#endif /* EGL_ANDROID_create_native_client_buffer */
+
 /**
  * @brief EGL_ANDROID_image_native_buffer
  * This extension enables using an Android window buffer (struct ANativeWindowBuffer), or an Android hardware buffer (struct AHardwareBuffer) as an EGLImage source.
