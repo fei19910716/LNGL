@@ -79,3 +79,8 @@ EGLAPI EGLBoolean EGLAPIENTRY eglQueryStreamTimeKHR (EGLDisplay dpy, EGLStreamKH
 EGLAPI EGLSurface EGLAPIENTRY eglCreateStreamProducerSurfaceKHR (EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, const EGLint *attrib_list);
 #endif /* EGL_KHR_stream */
 #endif /* EGL_KHR_stream_producer_eglsurface */
+
+#ifndef EGL_EXT_stream_consumer_egloutput
+#define EGL_EXT_stream_consumer_egloutput 1
+EGLAPI EGLBoolean EGLAPIENTRY eglStreamConsumerOutputEXT (EGLDisplay dpy, EGLStreamKHR stream, EGLOutputLayerEXT layer);
+#endif /* EGL_EXT_stream_consumer_egloutput */
